@@ -137,4 +137,62 @@ foreign import java unsafe repartition :: (k <: Object, v <: Object) => Int -> J
 
 foreign import java unsafe repartitionAndSortWithinPartitions :: (k <: Object, v <: Object) => Partitioner -> Java (JavaPairRDD k v) (JavaPairRDD k v)
 
-foreign import java unsafe repartitionAndSortWithinPartitions :: (k <: Object, v <: Object) => Partitioner -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+foreign import java unsafe repartitionAndSortWithinPartitions2 :: (k <: Object, v <: Object) => Partitioner -> Comparator k -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe rightOuterJoin :: (k <: Object, v <: Object, w <: Object) => JavaPairRDD k w -> Java (JavaPairRDD k v) (JavaPairRDD k (Tuple2 v) w)
+
+foreign import java unsafe rightOuterJoin2 :: (k <: Object, v <: Object, w <: Object) => JavaPairRDD k w -> Int -> Java (JavaPairRDD k v) (JavaPairRDD k (Tuple2 v) w)
+
+foreign import java unsafe rightOuterJoin3 :: (k <: Object, v <: Object, w <: Object) => JavaPairRDD k w -> Partitioner -> Java (JavaPairRDD k v) (JavaPairRDD k (Tuple2 v) w)
+
+foreign import java unsafe sample :: (k <: Object, v <: Object) => Bool -> Double -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe sample2 :: (k <: Object, v <: Object) => Bool -> Double -> Int64 -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe sampleByKey :: (k <: Object, v <: Object) => Bool -> Map k JDouble -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe sampleByKey2 :: (k <: Object, v <: Object) => Bool -> Map k JDouble -> Int64 -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe sampleByKeyExact :: (k <: Object, v <: Object) => Bool -> Map k JDouble -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe sampleByKeyExact2 :: (k <: Object, v <: Object) => Bool -> Map k JDouble -> Int64 -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe saveAsHadoopDataset :: (k <: Object, v <: Object) => JobConf -> Java (JavaPairRDD k v) ()
+
+foreign import java unsafe setName :: (k <: Object, v <: Object) => JString -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe sortByKey :: (k <: Object, v <: Object) => Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe sortByKey2 :: (k <: Object, v <: Object) => Bool -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe sortByKey3 :: (k <: Object, v <: Object) => Bool -> Int -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe sortByKey4 :: (k <: Object, v <: Object) => Comparator k -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe sortByKey5 :: (k <: Object, v <: Object) => Comparator k -> Bool -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe sortByKey6 :: (k <: Object, v <: Object) => Comparator k -> Bool -> Int -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe subtract :: (k <: Object, v <: Object) => JavaPairRDD k v -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe subtract2 :: (k <: Object, v <: Object) => JavaPairRDD k v -> Int -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe subtract3 :: (k <: Object, v <: Object) => JavaPairRDD k v -> Partitioner -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe subtractByKey :: (k <: Object, v <: Object, w <: Object) => JavaPairRDD k w -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe subtractByKey2 :: (k <: Object, v <: Object, w <: Object) => JavaPairRDD k w -> Int -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe subtractByKey3 :: (k <: Object, v <: Object, w <: Object) => JavaPairRDD k w -> Partitioner -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe union :: (k <: Object, v <: Object) => JavaPairRDD k v -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe unpersist :: (k <: Object, v <: Object) => Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe unpersist :: (k <: Object, v <: Object) => Bool -> Java (JavaPairRDD k v) (JavaPairRDD k v)
+
+foreign import java unsafe values :: (k <: Object, v <: Object) => Java (JavaPairRDD k v) (JavaRDD v)
+
+foreign import java unsafe vClassTag :: (k <: Object, v <: Object) => Java (JavaPairRDD k v) (ClassTag v)
+
+foreign import java unsafe wrapRDD :: (k <: Object, v <: Object) => RDD (Tuple2 k v) -> Java (JavaPairRDD k v) (JavaPairRDD k v)
