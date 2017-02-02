@@ -3,7 +3,7 @@ module Spark.Core.Internal.JavaPairRDD where
 
 import Java
 
-data {-# CLASS "org.apache.spark.api.java.JavaPairRDD" #-} JavaPairRDD k v = JavaRDD (Object# (JavaRDD k v)
+data {-# CLASS "org.apache.spark.api.java.JavaPairRDD" #-} JavaPairRDD k v = JavaPairRDD (Object# (JavaPairRDD k v)
   deriving Class
 
 foreign import java unsafe "@static org.apache.spark.api.java.JavaPairRDD.aggregate"
