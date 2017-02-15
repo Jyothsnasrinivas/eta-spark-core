@@ -23,7 +23,7 @@ foreign import java unsafe first :: Java JavaDoubleRDD JDouble
 
 foreign import java unsafe histogram :: JDoubleArray -> Java JavaDoubleRDD JLongArray
 
-foreign import java unsafe histogram2 :: JDoubleArray -> Bool-> Java JavaDoubleRDD JLongArray --TODO: Double[]
+foreign import java unsafe histogram2 :: JDoubleArray -> Bool -> Java JavaDoubleRDD JLongArray 
 
 foreign import java unsafe histogram3 :: Int -> Java JavaDoubleRDD (Tuple2 JDoubleArray JLongArray)
 
