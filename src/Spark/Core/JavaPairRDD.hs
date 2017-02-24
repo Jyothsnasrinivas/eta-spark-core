@@ -87,9 +87,9 @@ foreign import java unsafe countApproxDistinctByKey3 :: (k <: Object, v <: Objec
 countByKey :: (k <: Object, v <: Object) => Java (JavaPairRDD k v) [(k, Int64)]
 countByKey = fmap (map (fromJava . snd) . fromJava) S.countByKey
 
-foreign import java unsafe countByKeyApprox :: (k <: Object, v <: Object) => Int64 -> Java (JavaPairRDD k v) (PartialResult (Map k BoundedDouble))
+foreign import java unsafe countByKeyApprox :: (k <: Object, v <: Object) => Int64 -> Java (JavaPairRDD k v) (PartialResult (Map k BoundedDouble)) --todo
 
-foreign import java unsafe countByKeyApprox2 :: (k <: Object, v <: Object) => Int64 -> Double -> Java (JavaPairRDD k v) PartialResult(Map k BoundedDouble)
+foreign import java unsafe countByKeyApprox2 :: (k <: Object, v <: Object) => Int64 -> Double -> Java (JavaPairRDD k v) (PartialResult (Map k BoundedDouble)) --todo 
 
 foreign import java unsafe distinct :: (k <: Object, v <: Object) => Java (JavaPairRDD k v) (JavaPairRDD k v)
 
