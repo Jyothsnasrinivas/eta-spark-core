@@ -115,3 +115,15 @@ foreign import java unsafe plus :: Object -> Java Column Column
 foreign import java unsafe rlike :: JString -> Java Column Column
 
 foreign import java unsafe startsWith :: Column -> Java Column Column
+
+foreign import java unsafe startsWith2 :: JString -> Java Column Column
+
+foreign import java unsafe substr :: Column -> Column -> Java Column Column
+
+foreign import java unsafe substr2 :: Int -> Int -> Java Column Column
+
+foreign import java unsafe toString :: Java Column JString
+
+foreign import java unsafe unapply :: Column -> Java Column (Option Expression)
+
+foreign import java unsafe when :: Column -> Object -> Java Column Column
