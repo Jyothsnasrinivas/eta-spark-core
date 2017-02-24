@@ -1,13 +1,13 @@
 {-# LANGUAGE MagicHash #-}
-module Spark.Core.Internal.JavaRDD where
+module Spark.Core.JavaRDD where
 
 import Java
+import qualified Spark.Core.Internal.JavaRDD as S
 
-data {-# CLASS "org.apache.spark.api.java.JavaRDD" #-} JavaRDD t = JavaRDD (Object# (JavaRDD t))
-  deriving Class
-
-foreign import java unsafe "@static org.apache.spark.api.java.JavaRDD.aggregate"
-  aggregate :: (t <: Object, u <: Object) => u -> Function2 u t u -> Function2 u u u -> Java a u
+aggregate :: (t <: Object, u <: Object) => u -> (forall a. u -> t -> Java a u)
+                                             -> (forall a. u -> u -> Java a u)
+                                             -> Java a u
+aggregate u f1 f2 = S.aggregate u (mkFun2 f1) (mkFun2 f2)
 
 foreign import java unsafe cache :: (t <: Object) => Java (JavaRDD t) (JavaRDD t)
 
@@ -22,6 +22,9 @@ foreign import java unsafe classTag :: (t <: Object) => Java (JavaRDD t) (ClassT
 foreign import java unsafe coalesce :: (t <: Object) => Int -> Java (JavaRDD t) (JavaRDD t)
 
 foreign import java unsafe coalesce2 :: (t <: Object) => Int -> Bool -> Java (JavaRDD t) (JavaRDD t)
+
+collect :: (t <: Object) => Java a [t]
+collect = fmap fromJava S.collect
 
 foreign import java unsafe "@static org.apache.spark.api.java.JavaRDD.collect"
   collect :: (t <: Object) => Java a (List t)
@@ -63,7 +66,8 @@ foreign import java unsafe distinct :: (t <: Object) => Java (JavaRDD t) (JavaRD
 
 foreign import java unsafe distinct2 :: (t <: Object) => Int -> Java (JavaRDD t) (JavaRDD t)
 
-foreign import java unsafe filter :: (t <: Object) => Function t JBoolean -> Java (JavaRDD t) (JavaRDD t)
+filter :: (t <: Object) => (forall a. t -> Java a JBoolean) -> Java (JavaRDD t) (JavaRDD t)
+filter f = S.filter (mkFun f)
 
 foreign import java unsafe "@static org.apache.spark.api.java.JavaRDD.first"
   first :: (t <: Object) => Java a t
@@ -179,7 +183,7 @@ foreign import java unsafe "@static org.apache.spark.api.java.JavaRDD.partitione
 foreign import java unsafe "@static org.apache.spark.api.java.JavaRDD.partitions"
   partitions :: (t <: Object) => Java a (List Partition)
 
-foreign import java unsafe persist :: (t <: Object) => StorageLevel newLevel -> Java (JavaRDD t) (JavaRDD t)
+foreign import java unsafe persist :: (t <: Object) => StorageLevel -> Java (JavaRDD t) (JavaRDD t)
 
 foreign import java unsafe "@static org.apache.spark.api.java.JavaRDD.pipe"
   pipe :: (t <: Object) => List JString -> Java a (JavaRDD JString)
@@ -196,9 +200,11 @@ foreign import java unsafe "@static org.apache.spark.api.java.JavaRDD.pipe4"
 foreign import java unsafe "@static org.apache.spark.api.java.JavaRDD.pipe5"
   pipe5 :: (t <: Object) => JString -> Java a (JavaRDD JString)
 
-foreign import java unsafe randomSplit :: (t <: Object) => JDoubleArray -> Java (JavaRDD t) (JavaRDDArray t)
+randomSplit :: (t <: Object) => [Double] -> Java (JavaRDD t) [JavaRDD t]
+randomSplit t = fmap fromJava (S.randomSplit (toJava t))
 
-foreign import java unsafe randomSplit2 :: (t <: Object) => JDoubleArray -> Int64 -> Java (JavaRDD t) (JavaRDDArray t)
+randomSplit2 :: (t <: Object) => [Double] -> Int64 -> Java (JavaRDD t) [JavaRDD t]
+randomSplit2 t1 t2 = fmap fromJava (S.randomSplit2 (toJava t1) t2)
 
 foreign import java unsafe rdd :: (t <: Object) => Java (JavaRDD t) (RDD t)
 
@@ -221,6 +227,9 @@ foreign import java unsafe "@static org.apache.spark.api.java.JavaRDD.saveAsText
   saveAsObjectFile2 :: (t <: Object, b <: CompressionCodec) => JString -> JClass b -> Java a ()
 
 foreign import java unsafe setName :: (t <: Object) => String -> Java (JavaRDD t) (JavaRDD t)
+
+sortBy :: (t <: Object, s <: Object) => (forall a. t -> Java a s) -> Bool -> Int -> Java (JavaRDD t) (JavaRDD t)
+sortBy t1 t2 t3 = S.sortBy (mkFun t1) t2 t3
 
 foreign import java unsafe sortBy :: (t <: Object, s <: Object) => Function t s -> Bool -> Int -> Java (JavaRDD t) (JavaRDD t)
 

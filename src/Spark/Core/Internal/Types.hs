@@ -3,6 +3,14 @@ module Spark.Core.Internal.Types where
 
 import Java
 
+data {-# CLASS "java.util.List[]" #-} ListArray t = ListArray (Object# (ListArray t))
+  deriving Class
+
+data {-# CLASS "org.apache.spark.api.java.JavaRDD[]" #-} JavaRDDArray t = JavaRDDArray (Object# (JavaRDDArray t))
+  deriving Class
+
+instance JArray (JavaRDD t) (JavaRDDArray t)
+
 data {-# CLASS "org.apache.spark.api.java.function.CoGroupFunction" #-}
   CoGroupFunction k v1 v2 r = CoGroupFunction (Object# (CoGroupFunction k v1 v2 r)
   deriving Class
