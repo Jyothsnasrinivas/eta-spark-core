@@ -3,7 +3,7 @@
 module Spark.Core.JavaNewHadoopRDD where
 
 import Java
-import qualified Spark.Core.JavaNewHadoopRDD as S
+import qualified Spark.Core.Internal.JavaNewHadoopRDD as S
 
 data {-# CLASS "org.apache.spark.api.java.JavaNewHadoopRDD" #-} JavaNewHadoopRDD k v = JavaNewHadoopRDD (Object# (JavaNewHadoopRDD k v)
   deriving Class

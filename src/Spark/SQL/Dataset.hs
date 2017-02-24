@@ -2,10 +2,14 @@
 module Spark.SQL.Dataset where
 
 import Java
-import qualified Spark.SQL.Dataset as S
+import qualified Spark.SQL.Internal.Dataset as S
 
 data {-# CLASS "org.apache.spark.api.java.Dataset" #-} Dataset t = Dataset (Object# (Dataset t)
   deriving Class
+
+agg :: (t <: Object) => Column -> [Column]
+                               -> Java (Dataset t) (Dataset Row)
+agg t1 t2 = S.agg t1 (toJava t2)
 
 foreign import java unsafe agg :: (t <: Object) => Column -> ColumnArray
                                ->Java (Dataset t) (Dataset Row)

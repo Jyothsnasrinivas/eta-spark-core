@@ -2,7 +2,7 @@
 module Spark.Core.JavaRDDLike where
 
 import Java
-import qualified Spark.Core.JavaRDDLike as S
+import qualified Spark.Core.Internal.JavaRDDLike as S
 
 data {-# CLASS "org.apache.spark.api.java.JavaRDDLike" #-} JavaRDDLike t this = JavaRDDLike (Object# (JavaRDDLike t this)
   deriving Class

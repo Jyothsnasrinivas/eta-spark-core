@@ -3,7 +3,7 @@
 module Spark.Core.JavaDoubleRDD where
 
 import Java
-import qualified Spark.Core.JavaDoubleRDD as S
+import qualified Spark.Core.Internal.JavaDoubleRDD as S
 
 data {-# CLASS "org.apache.spark.api.java.JavaDoubleRDD" #-} JavaDoubleRDD = JavaDoubleRDD (Object# (JavaDoubleRDD)
   deriving Class

@@ -2,7 +2,7 @@
 module Spark.Core.JavaPairRDD where
 
 import Java
-import qualified Spark.Core.JavaPairRDD as S
+import qualified Spark.Core.Internal.JavaPairRDD as S
 
 foreign import java unsafe "@static org.apache.spark.api.java.JavaPairRDD.aggregate"
 aggregate :: (t <: Object, u <: Object) => u -> Function2 u t u -> Function2 u u u -> Java a u
@@ -89,7 +89,7 @@ countByKey = fmap (map (fromJava . snd) . fromJava) S.countByKey
 
 foreign import java unsafe countByKeyApprox :: (k <: Object, v <: Object) => Int64 -> Java (JavaPairRDD k v) (PartialResult (Map k BoundedDouble)) --todo
 
-foreign import java unsafe countByKeyApprox2 :: (k <: Object, v <: Object) => Int64 -> Double -> Java (JavaPairRDD k v) (PartialResult (Map k BoundedDouble)) --todo 
+foreign import java unsafe countByKeyApprox2 :: (k <: Object, v <: Object) => Int64 -> Double -> Java (JavaPairRDD k v) (PartialResult (Map k BoundedDouble)) --todo
 
 foreign import java unsafe distinct :: (k <: Object, v <: Object) => Java (JavaPairRDD k v) (JavaPairRDD k v)
 

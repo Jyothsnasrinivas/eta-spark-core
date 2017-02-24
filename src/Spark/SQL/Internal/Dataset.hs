@@ -3,11 +3,11 @@ module Spark.SQL.Internal.Dataset where
 
 import Java
 
-data {-# CLASS "org.apache.spark.api.java.Dataset" #-} Dataset t = Dataset (Object# (Dataset t)
+data {-# CLASS "org.apache.spark.sql.Dataset" #-} Dataset t = Dataset (Object# (Dataset t))
   deriving Class
 
 foreign import java unsafe agg :: (t <: Object) => Column -> ColumnArray
-                               ->Java (Dataset t) (Dataset Row)
+                               -> Java (Dataset t) (Dataset Row)
 
 foreign import java unsafe agg2 :: (t <: Object) => Column -> Seq Column
                                 ->Java (Dataset t) (Dataset Row)
@@ -141,7 +141,7 @@ foreign import java unsafe foreach2 :: (t <: Object) => Function1 t BoxedUnit ->
 
 foreign import java unsafe foreachPartition :: (t <: Object) => ForeachPartitionFunction t -> Java (Dataset t) ()
 
-foreign import java unsafe foreachPartition :: (t <: Object)
+foreign import java unsafe foreachPartition2 :: (t <: Object)
                                             => Function1 (Iterator t) BoxedUnit -> Java (Dataset t) ()
 
 foreign import java unsafe groupBy :: (t <: Object) => ColumnArray -> Java (Dataset t) (RelationalGroupedDataset)--TODO
@@ -275,17 +275,17 @@ foreign import java unsafe select4 :: (t <: Object) => JString -> JStringArray -
 foreign import java unsafe select5 :: (t <: Object, u1 <: Object) => TypedColumn t u1 -> Java (Dataset t) (Dataset u1)
 
 foreign import java unsafe select6 :: (t <: Object, u1 <: Object, u2 <: Object)
-                                   => TypedColumn t u1 -> TypedColumn t u2 -> Java (Dataset t) (Dataset (Tuple2 u1 u2)
+                                   => TypedColumn t u1 -> TypedColumn t u2 -> Java (Dataset t) (Dataset (Tuple2 u1 u2))
 
 foreign import java unsafe select7 :: (t <: Object, u1 <: Object, u2 <: Object, u3 <: Object)
-                                  => TypedColumn t u1 -> TypedColumn t u2 -> TypedColumn t u3 -> Java (Dataset t) (Dataset (Tuple3 u1 u2 u3)
+                                  => TypedColumn t u1 -> TypedColumn t u2 -> TypedColumn t u3 -> Java (Dataset t) (Dataset (Tuple3 u1 u2 u3))
 
 foreign import java unsafe select8 :: (t <: Object, u1 <: Object, u2 <: Object, u3 <: Object, u4 <: Object)
-                                   => TypedColumn t u1 -> TypedColumn t u2 -> TypedColumn t u3 -> TypedColumn t u4 -> Java (Dataset t) (Dataset (Tuple4 u1 u2 u3 u4)
+                                   => TypedColumn t u1 -> TypedColumn t u2 -> TypedColumn t u3 -> TypedColumn t u4 -> Java (Dataset t) (Dataset (Tuple4 u1 u2 u3 u4))
 
 
 foreign import java unsafe select9 :: (t <: Object, u1 <: Object, u2 <: Object, u3 <: Object, u4 <: Object, u5 <: Object)
-                                  => TypedColumn t u1 -> TypedColumn t u2 -> TypedColumn t u3 -> TypedColumn t u4 -> TypedColumn t u5 -> Java (Dataset t) (Dataset (Tuple5 u1 u2 u3 u4 u5)
+                                  => TypedColumn t u1 -> TypedColumn t u2 -> TypedColumn t u3 -> TypedColumn t u4 -> TypedColumn t u5 -> Java (Dataset t) (Dataset (Tuple5 u1 u2 u3 u4 u5))
 
 foreign import java unsafe selectExpr :: (t <: Object) => Seq JString -> Java (Dataset t) (Dataset row)
 
@@ -356,7 +356,7 @@ foreign import java unsafe unpersist :: (t <: Object) => Java (Dataset t) (Datas
 
 foreign import java unsafe unpersist2 :: (t <: Object) => Bool -> Java (Dataset t) (Dataset t)
 
-foreign import java unsafe where :: (t <: Object) => Column -> Java (Dataset t) (Dataset t)
+foreign import java unsafe "where" where_ :: (t <: Object) => Column -> Java (Dataset t) (Dataset t)
 
 foreign import java unsafe where2 :: (t <: Object) => JString -> Java (Dataset t) (Dataset t)
 
