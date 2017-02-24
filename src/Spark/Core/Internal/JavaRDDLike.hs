@@ -157,10 +157,10 @@ foreign import java unsafe top :: (t <: Object, this <: JavaRDDLike t this) => I
 foreign import java unsafe top2 :: (t <: Object, this <: JavaRDDLike t this) => Int -> Comparator t -> Java this (List t)
 
 foreign import java unsafe treeAggregate :: (t <: Object, this <: JavaRDDLike t this, u <: Object)
-                                         => u -> Function2 u t u -> Function u u u -> Java this u
+                                         => u -> Function2 u t u -> Function2 u u u -> Java this u
 
 foreign import java unsafe treeAggregate2 :: (t <: Object, this <: JavaRDDLike t this, u <: Object)
-                                        => u -> Function2 u t u -> Function u u u -> Int -> Java this u
+                                        => u -> Function2 u t u -> Function2 u u u -> Int -> Java this u
 
 foreign import java unsafe treeReduce :: (t <: Object, this <: JavaRDDLike t this) => Function2 t t t -> Java this t
 

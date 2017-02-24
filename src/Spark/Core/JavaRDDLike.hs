@@ -138,30 +138,83 @@ keyBy :: (t <: Object, this <: JavaRDDLike t this, u <: Object)
 keyBy t = S.keyBy (mkFun t)
 
 --foreign import java unsafe keyBy :: (t <: Object, this <: JavaRDDLike t this, u <: Object) => Function t u -> Java this (JavaPairRDD u t)
+map :: (t <: Object, this <: JavaRDDLike t this, r <: Object)
+    => (forall a. t -> Java a r)
+    -> Java this (JavaRDD r)
+map t = S.map (mkFun t)
 
-foreign import java unsafe map :: (t <: Object, this <: JavaRDDLike t this, r <: Object) => Function t r -> Java this (JavaRDD r)
+--foreign import java unsafe map :: (t <: Object, this <: JavaRDDLike t this, r <: Object) => Function t r -> Java this (JavaRDD r)
 
-foreign import java unsafe mapPartitions :: (t <: Object, this <: JavaRDDLike t this, u <: Object) => FlatMapFunction (Iterator t) u -> Java this (JavaRDD u)
+mapPartitions :: (t <: Object, this <: JavaRDDLike t this, u <: Object)
+              => (forall a. Iterator t -> Java a u)
+              -> Java this (JavaRDD u)
+mapPartitions t = S.mapPartitions (mkFlatMapFun t)
 
-foreign import java unsafe mapPartitions2 :: (t <: Object, this <: JavaRDDLike t this, u <: Object) => FlatMapFunction (Iterator t) u -> Bool -> Java this (JavaRDD u)
+--foreign import java unsafe mapPartitions :: (t <: Object, this <: JavaRDDLike t this, u <: Object) => FlatMapFunction (Iterator t) u -> Java this (JavaRDD u)
 
-foreign import java unsafe mapPartitionsToDouble :: (t <: Object, this <: JavaRDDLike t this) => DoubleFlatMapFunction (Iterator t) -> Java this JavaDoubleRDD
+mapPartitions2 :: (t <: Object, this <: JavaRDDLike t this, u <: Object)
+              => (forall a. Iterator t -> Java a u)
+              -> Bool
+              -> Java this (JavaRDD u)
+mapPartitions2 t1 t2 = S.mapPartitions (mkFlatMapFun t1) t2
 
-foreign import java unsafe mapPartitionsToDouble2 :: (t <: Object, this <: JavaRDDLike t this) => DoubleFlatMapFunction (Iterator t) -> Bool -> Java this JavaDoubleRDD
+--foreign import java unsafe mapPartitions2 :: (t <: Object, this <: JavaRDDLike t this, u <: Object) => FlatMapFunction (Iterator t) u -> Bool -> Java this (JavaRDD u)
 
-foreign import java unsafe mapPartitionsToPair :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object)
-                                              => PairFlatMapFunction (Iterator t) k2 v2 -> Java this (JavaPairRDD k2 v2)
+mapPartitionsToDouble :: (t <: Object, this <: JavaRDDLike t this)
+              => (forall a. Iterator t -> Java a (Iterator JDouble))
+              -> Java this (JavaDoubleRDD)
+mapPartitionsToDouble t = S.mapPartitionsToDouble (mkDoubleFlatMapFun t)
 
-foreign import java unsafe mapPartitionsToPair2 :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object)
-                                               => PairFlatMapFunction (Iterator t) k2 v2 -> Bool -> Java this (JavaPairRDD k2 v2)
+--foreign import java unsafe mapPartitionsToDouble :: (t <: Object, this <: JavaRDDLike t this) => DoubleFlatMapFunction (Iterator t) -> Java this JavaDoubleRDD
 
-foreign import java unsafe mapPartitionsWithIndex :: (t <: Object, this <: JavaRDDLike t this, r <: Object)
-                                                  => Function2 JInteger (Iterator t) (Iterator r) -> Bool -> Java this (JavaRDD r)
+mapPartitionsToDouble2 :: (t <: Object, this <: JavaRDDLike t this)
+              => (forall a. Iterator t -> Java a (Iterator JDouble))
+              -> Bool
+              -> Java this (JavaDoubleRDD)
+mapPartitionsToDouble2 t1 t2 = S.mapPartitionsToDouble (mkDoubleFlatMapFun2 t1) t2
 
-foreign import java unsafe mapToDouble :: (t <: Object, this <: JavaRDDLike t this, r <: Object) => DoubleFunction -> Java this JavaDoubleRDD
+--foreign import java unsafe mapPartitionsToDouble2 :: (t <: Object, this <: JavaRDDLike t this) => DoubleFlatMapFunction (Iterator t) -> Bool -> Java this JavaDoubleRDD
 
-foreign import java unsafe mapToPair :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object)
-                                     => PairFunction t k2 v2 -> Java this (JavaPairRDD k2 v2)
+mapPartitionsToPair :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object)
+                    => (forall a. Iterator t -> k2 -> Java a v2)
+                    -> Java this (JavaPairRDD k2 v2)
+mapPartitionsToPair t = S.mapPartitionsToPair (mkPairFlatMapFun t)
+
+-- foreign import java unsafe mapPartitionsToPair :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object)
+--                                               => PairFlatMapFunction (Iterator t) k2 v2 -> Java this (JavaPairRDD k2 v2)
+
+mapPartitionsToPair2 :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object)
+                    => (forall a. Iterator t -> k2 -> Java a v2)
+                    -> Bool
+                    -> Java this (JavaPairRDD k2 v2)
+mapPartitionsToPair2 t1 t2 = S.mapPartitionsToPair2 (mkPairFlatMapFun t1) t2
+
+-- foreign import java unsafe mapPartitionsToPair2 :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object)
+--                                                => PairFlatMapFunction (Iterator t) k2 v2 -> Bool -> Java this (JavaPairRDD k2 v2)
+
+mapPartitionsWithIndex :: (t <: Object, this <: JavaRDDLike t this, r <: Object)
+                    => (forall a. JInteger -> Iterator t -> Java a (Iterator r))
+                    -> Bool
+                    -> Java this (JavaRDD r)
+mapPartitionsWithIndex t1 t2 = S.mapPartitionsWithIndex (mkFun2 t1) t2
+
+-- foreign import java unsafe mapPartitionsWithIndex :: (t <: Object, this <: JavaRDDLike t this, r <: Object)
+--                                                   => Function2 JInteger (Iterator t) (Iterator r) -> Bool -> Java this (JavaRDD r)
+
+mapToDouble :: (t <: Object, this <: JavaRDDLike t this, r <: Object)
+            => (forall a. t -> Java a (Iterator Double))
+            -> Java this JavaDoubleRDD
+mapToDouble t -> S.mapToDouble (mkDoubleFun t)
+
+--foreign import java unsafe mapToDouble :: (t <: Object, this <: JavaRDDLike t this, r <: Object) => DoubleFunction -> Java this JavaDoubleRDD
+
+mapToPair :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object)
+          => (forall a. t -> k2 -> Java a v2)
+          -> Java this (JavaPairRDD k2 v2)
+mapToPair t = S.mapToPair (mkPairFun t)
+
+-- foreign import java unsafe mapToPair :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object)
+--                                      => PairFunction t k2 v2 -> Java this (JavaPairRDD k2 v2)
 
 foreign import java unsafe max :: (t <: Object, this <: JavaRDDLike t this) => Comparator t -> Java this t
 
@@ -178,16 +231,21 @@ foreign import java unsafe pipe :: (t <: Object, this <: JavaRDDLike t this) => 
 foreign import java unsafe pipe2 :: (t <: Object, this <: JavaRDDLike t this) => List JString -> Map JString JString -> Java this (JavaRDD JString)
 
 foreign import java unsafe pipe3 :: (t <: Object, this <: JavaRDDLike t this)
-                                 => List JString -> Map JString JString -> Bool -> Int -> Java this (JavaRDD JString)
+                                 => List JString -> Map JString JString -> Bool -> Int -> Java this (JavaRDD JString) --todo
 
 foreign import java unsafe pipe4 :: (t <: Object, this <: JavaRDDLike t this)
-                                => List JString -> Map JString JString -> Bool -> Int -> JString -> Java this (JavaRDD JString)
+                                => List JString -> Map JString JString -> Bool -> Int -> JString -> Java this (JavaRDD JString)--todo
 
 foreign import java unsafe pipe5 :: (t <: Object, this <: JavaRDDLike t this) => JString -> Java this (JavaRDD JString)
 
 foreign import java unsafe rdd :: (t <: Object, this <: JavaRDDLike t this) => Java this (RDD t)
 
-foreign import java unsafe reduce :: (t <: Object, this <: JavaRDDLike t this) => Function2 t t t -> Java this t
+reduce :: (t <: Object, this <: JavaRDDLike t this)
+       => (forall a. t -> t -> Java a t)
+       -> Java this t
+reduce t = S.reduce (mkFun2 t)
+
+--foreign import java unsafe reduce :: (t <: Object, this <: JavaRDDLike t this) => Function2 t t t -> Java this t
 
 foreign import java unsafe saveAsObjectFile :: (t <: Object, this <: JavaRDDLike t this) => JString -> Java this ()
 
@@ -215,22 +273,47 @@ foreign import java unsafe top :: (t <: Object, this <: JavaRDDLike t this) => I
 
 foreign import java unsafe top2 :: (t <: Object, this <: JavaRDDLike t this) => Int -> Comparator t -> Java this (List t)
 
-foreign import java unsafe treeAggregate :: (t <: Object, this <: JavaRDDLike t this, u <: Object)
-                                         => u -> Function2 u t u -> Function u u u -> Java this u
+treeAggregate :: (t <: Object, this <: JavaRDDLike t this, u <: Object)
+              => u -> (forall a. u -> t -> Java a u)
+              -> (forall a. u -> u -> Java a u)
+              -> Java this u
+treeAggregate t1 t2 t3 = S.treeAggregate t1 (mkFun2 t2) (mkFun2 t3)
 
-foreign import java unsafe treeAggregate2 :: (t <: Object, this <: JavaRDDLike t this, u <: Object)
-                                        => u -> Function2 u t u -> Function u u u -> Int -> Java this u
+-- foreign import java unsafe treeAggregate :: (t <: Object, this <: JavaRDDLike t this, u <: Object)
+--                                          => u -> Function2 u t u -> Function2 u u u -> Java this u
 
-foreign import java unsafe treeReduce :: (t <: Object, this <: JavaRDDLike t this) => Function2 t t t -> Java this t
+treeAggregate2 :: (t <: Object, this <: JavaRDDLike t this, u <: Object)
+              => u -> (forall a. u -> t -> Java a u)
+              -> (forall a. u -> u -> Java a u)
+              -> Int
+              -> Java this u
+treeAggregate2 t1 t2 t3 t4 = S.treeAggregate2 t1 (mkFun2 t2) (mkFun2 t3) t4
 
-foreign import java unsafe treeReduce2 :: (t <: Object, this <: JavaRDDLike t this) => Function2 t t t -> Int -> Java this t
+-- foreign import java unsafe treeAggregate2 :: (t <: Object, this <: JavaRDDLike t this, u <: Object)
+--                                         => u -> Function2 u t u -> Function2 u u u -> Int -> Java this u
+
+treeReduce :: (t <: Object, this <: JavaRDDLike t this) => (forall a. t -> t -> Java a t) -> Java this t
+treeReduce t = S.treeReduce (mkFun2 t)
+
+--foreign import java unsafe treeReduce :: (t <: Object, this <: JavaRDDLike t this) => Function2 t t t -> Java this t
+
+treeReduce2 :: (t <: Object, this <: JavaRDDLike t this) => (forall a. t -> t -> Java a t) -> Int -> Java this t
+treeReduce2 t1 t2 = S.treeReduce2 (mkFun2 t1) t2
+
+--foreign import java unsafe treeReduce2 :: (t <: Object, this <: JavaRDDLike t this) => Function2 t t t -> Int -> Java this t
 
 foreign import java unsafe wrapRDD :: (t <: Object, this <: JavaRDDLike t this) => RDD t -> Java this this
 
 foreign import java unsafe zip :: (t <: Object, this <: JavaRDDLike t this, u <: Object) => JavaRDDLike u b -> Java this (JavaPairRDD t u)
 
-foreign import java unsafe zipPartitions :: (t <: Object, this <: JavaRDDLike t this, u <: Object, v <: Object)
-                                         => JavaRDDLike u b -> FlatMapFunction2 (Iterator t) (Iterator u) v -> Java this (JavaPairRDD t u)
+zipPartitions :: (t <: Object, this <: JavaRDDLike t this, u <: Object, v <: Object)
+              => JavaRDDLike u b
+              -> (forall a. Iterator t -> Iterator u -> Java a v)
+              -> Java this (JavaPairRDD t u)
+zipPartitions t1 t2 -> S.zipPartitions t1 (mkFlatMapFun2 t2)
+
+-- foreign import java unsafe zipPartitions :: (t <: Object, this <: JavaRDDLike t this, u <: Object, v <: Object)
+--                                          => JavaRDDLike u b -> FlatMapFunction2 (Iterator t) (Iterator u) v -> Java this (JavaPairRDD t u)
 
 foreign import java unsafe zipWithIndex :: (t <: Object, this <: JavaRDDLike t this) => Java this (JavaPairRDD t JLong)
 
