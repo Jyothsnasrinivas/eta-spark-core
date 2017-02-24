@@ -28,17 +28,17 @@ foreign import java unsafe first :: Java JavaDoubleRDD JDouble
 histogram :: [Double] -> Java JavaDoubleRDD [Int64]
 histogram t = fmap (map fromJava . fromJava) $ S.histogram (toJava t)
 
-foreign import java unsafe histogram :: JDoubleArray -> Java JavaDoubleRDD JLongArray
+--foreign import java unsafe histogram :: JDoubleArray -> Java JavaDoubleRDD JLongArray
 
 histogram2 :: [Double] -> Bool -> Java JavaDoubleRDD [Int64]
 histogram2 t1 t2 = fmap (map fromJava . fromJava) $ S.histogram2 (toJava t1) t2
 
-foreign import java unsafe histogram2 :: JDoubleArray -> Bool -> Java JavaDoubleRDD JLongArray
+--foreign import java unsafe histogram2 :: JDoubleArray -> Bool -> Java JavaDoubleRDD JLongArray
 
 histogram3 :: Int -> Java JavaDoubleRDD (JDoubleArray, JLongArray)
 histogram3 t = fmap fromJava $ S.histogram3 t
 
-foreign import java unsafe histogram3 :: Int -> Java JavaDoubleRDD (Tuple2 JDoubleArray JLongArray)
+--foreign import java unsafe histogram3 :: Int -> Java JavaDoubleRDD (Tuple2 JDoubleArray JLongArray)
 
 foreign import java unsafe intersection :: JavaDoubleRDD -> Java JavaDoubleRDD JavaDoubleRDD
 
