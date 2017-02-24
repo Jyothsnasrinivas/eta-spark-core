@@ -3,9 +3,7 @@
 module Spark.Core.Internal.JavaDoubleRDD where
 
 import Java
-
-data {-# CLASS "org.apache.spark.api.java.JavaDoubleRDD" #-} JavaDoubleRDD = JavaDoubleRDD (Object# (JavaDoubleRDD)
-  deriving Class
+import Spark.Core.Internal.Types
 
 foreign import java unsafe cache :: Java JavaDoubleRDD JavaDoubleRDD
 
@@ -23,7 +21,7 @@ foreign import java unsafe first :: Java JavaDoubleRDD JDouble
 
 foreign import java unsafe histogram :: JDoubleArray -> Java JavaDoubleRDD JLongArray
 
-foreign import java unsafe histogram2 :: JDoubleArray -> Bool -> Java JavaDoubleRDD JLongArray 
+foreign import java unsafe histogram2 :: JDoubleArray -> Bool -> Java JavaDoubleRDD JLongArray
 
 foreign import java unsafe histogram3 :: Int -> Java JavaDoubleRDD (Tuple2 JDoubleArray JLongArray)
 

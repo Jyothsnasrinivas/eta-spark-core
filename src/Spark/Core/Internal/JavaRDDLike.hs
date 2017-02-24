@@ -2,9 +2,7 @@
 module Spark.Core.Internal.JavaRDDLike where
 
 import Java
-
-data {-# CLASS "org.apache.spark.api.java.JavaRDDLike" #-} JavaRDDLike t this = JavaRDDLike (Object# (JavaRDDLike t this)
-  deriving Class
+import Spark.Core.Internal.Types
 
 foreign import java unsafe aggregateByKey :: (t <: Object, this <: JavaRDDLike t this, u <: Object) => u
                                           -> Function2 u t u -> Function2 u u u -> Java this (u)

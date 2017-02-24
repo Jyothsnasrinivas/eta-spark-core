@@ -2,9 +2,7 @@
 module Spark.SQL.Internal.Column where
 
 import Java
-
-data {-# CLASS "org.apache.spark.sql.Column" #-} Column = Column (Object# Column)
-  deriving Class
+import Spark.SQL.Internal.Types
 
 foreign import java unsafe alias :: JString -> Java Column Column
 
@@ -14,15 +12,15 @@ foreign import java unsafe apply :: Object -> Java Column Column
 
 foreign import java unsafe as :: (u <: Object) => Encoder u -> Java Column (TypedColumn Object u)
 
-foreign import java unsafe as2 :: Seq JString -> Java Column Column
+-- foreign import java unsafe as2 :: Seq JString -> Java Column Column
 
-foreign import java unsafe as3 :: JString -> Java Column Column
+foreign import java unsafe as2 :: JString -> Java Column Column
 
-foreign import java unsafe as4 :: JStringArray -> Java Column Column
+foreign import java unsafe as3 :: JStringArray -> Java Column Column
 
-foreign import java unsafe as5 :: JString -> Metadata -> Java Column Column
+foreign import java unsafe as4 :: JString -> Metadata -> Java Column Column
 
-foreign import java unsafe as6 :: Symbol -> Java Column Column
+-- foreign import java unsafe as5 :: Symbol -> Java Column Column
 
 foreign import java unsafe asc_nulls_first :: Java Column Column
 
@@ -78,7 +76,7 @@ foreign import java unsafe hashcode :: Java Column Int
 
 foreign import java unsafe isin :: JObjectArray -> Java Column Column
 
-foreign import java unsafe isin2 :: Seq Object -> Java Column Column
+-- foreign import java unsafe isin2 :: Seq Object -> Java Column Column
 
 foreign import java unsafe isNaN :: Java Column Column
 
@@ -123,7 +121,5 @@ foreign import java unsafe substr :: Column -> Column -> Java Column Column
 foreign import java unsafe substr2 :: Int -> Int -> Java Column Column
 
 foreign import java unsafe toString :: Java Column JString
-
-foreign import java unsafe unapply :: Column -> Java Column (Option Expression)
 
 foreign import java unsafe when :: Column -> Object -> Java Column Column

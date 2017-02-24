@@ -5,9 +5,6 @@ module Spark.Core.JavaDoubleRDD where
 import Java
 import qualified Spark.Core.Internal.JavaDoubleRDD as S
 
-data {-# CLASS "org.apache.spark.api.java.JavaDoubleRDD" #-} JavaDoubleRDD = JavaDoubleRDD (Object# (JavaDoubleRDD)
-  deriving Class
-
 foreign import java unsafe cache :: Java JavaDoubleRDD JavaDoubleRDD
 
 foreign import java unsafe coalesce :: Int -> Java JavaDoubleRDD JavaDoubleRDD

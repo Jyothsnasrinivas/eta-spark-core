@@ -2,9 +2,7 @@
 module Spark.Core.Internal.JavaPairRDD where
 
 import Java
-
-data {-# CLASS "org.apache.spark.api.java.JavaPairRDD" #-} JavaPairRDD k v = JavaPairRDD (Object# (JavaPairRDD k v)
-  deriving Class
+import Spark.Core.Internal.Types
 
 foreign import java unsafe "@static org.apache.spark.api.java.JavaPairRDD.aggregate"
   aggregate :: (t <: Object, u <: Object) => u -> Function2 u t u -> Function2 u u u -> Java a u

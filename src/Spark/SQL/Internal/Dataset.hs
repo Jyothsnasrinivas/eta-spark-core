@@ -2,30 +2,22 @@
 module Spark.SQL.Internal.Dataset where
 
 import Java
-
-data {-# CLASS "org.apache.spark.sql.Dataset" #-} Dataset t = Dataset (Object# (Dataset t))
-  deriving Class
+import Spark.SQL.Internal.Types
 
 foreign import java unsafe agg :: (t <: Object) => Column -> ColumnArray
                                -> Java (Dataset t) (Dataset Row)
 
-foreign import java unsafe agg2 :: (t <: Object) => Column -> Seq Column
-                                ->Java (Dataset t) (Dataset Row)
+-- foreign import java unsafe agg2 :: (t <: Object) => Column -> Seq Column
+--                                 -> Java (Dataset t) (Dataset Row)
 
-foreign import java unsafe agg3 :: (t <: Object) => Map JString JString
-                                ->Java (Dataset t) (Dataset Row)
-
-foreign import java unsafe agg4 :: (t <: Object) => Map JString JString
-                                ->Java (Dataset t) (Dataset Row)
-
-foreign import java unsafe agg5 :: (t <: Object) => Tuple2 JString JString -> Seq (Tuple2 JString JString)
+foreign import java unsafe agg2 :: (t <: Object) => Map JString JString
                                 -> Java (Dataset t) (Dataset Row)
 
 foreign import java unsafe alias :: (t <: Object) => JString
                               -> Java (Dataset t) (Dataset t)
 
-foreign import java unsafe alias2 :: (t <: Object) => Symbol
-                                 -> Java (Dataset t) (Dataset t)
+-- foreign import java unsafe alias2 :: (t <: Object) => Symbol
+--                                  -> Java (Dataset t) (Dataset t)
 
 foreign import java unsafe apply :: (t <: Object) => JString
                                 -> Java (Dataset t) (Column)
@@ -36,8 +28,8 @@ foreign import java unsafe as :: (t <: Object, u <: Object) => Encoder u
 foreign import java unsafe as2 :: (t <: Object) => JString
                                -> Java (Dataset t) (Dataset t)
 
-foreign import java unsafe as3 :: (t <: Object) => Symbol
-                              -> Java (Dataset t) (Dataset t)
+-- foreign import java unsafe as3 :: (t <: Object) => Symbol
+--                               -> Java (Dataset t) (Dataset t)
 
 foreign import java unsafe cache :: (t <: Object) => Java (Dataset t) (Dataset t)
 
@@ -45,7 +37,7 @@ foreign import java unsafe checkpoint :: (t <: Object) => Java (Dataset t) (Data
 
 foreign import java unsafe checkpoint2 :: (t <: Object) => Bool -> Java (Dataset t) (Dataset t)
 
-foreign import java unsafe classTag :: (t <: Object) => Java (Dataset t) (ClassTag t)
+-- foreign import java unsafe classTag :: (t <: Object) => Java (Dataset t) (ClassTag t)
 
 foreign import java unsafe coalesce :: (t <: Object) => Int -> Java (Dataset t) (Dataset t)
 
@@ -71,38 +63,38 @@ foreign import java unsafe crossJoin :: (t <: Object) => Dataset b -> Java (Data
 
 foreign import java unsafe cube:: (t <: Object) => ColumnArray -> Java (Dataset t) (RelationalGroupedDataset)
 
-foreign import java unsafe cube2 :: (t <: Object) => Seq Column -> Java (Dataset t) (RelationalGroupedDataset)
+--foreign import java unsafe cube2 :: (t <: Object) => Seq Column -> Java (Dataset t) (RelationalGroupedDataset)
 
-foreign import java unsafe cube3 :: (t <: Object)
-                                 => JString -> Seq Column -> Java (Dataset t) (RelationalGroupedDataset)
+-- foreign import java unsafe cube3 :: (t <: Object)
+--                                  => JString -> Seq Column -> Java (Dataset t) (RelationalGroupedDataset)
 
 foreign import java unsafe cube4 :: (t <: Object)
                                  => JString -> JStringArray -> Java (Dataset t) (RelationalGroupedDataset)
 
-foreign import java unsafe describe :: (t <: Object) => Seq JString -> Java (Dataset t) (Dataset row)
+-- foreign import java unsafe describe :: (t <: Object) => Seq JString -> Java (Dataset t) (Dataset row)
 
-foreign import java unsafe describe2 :: (t <: Object) => JString -> Java (Dataset t) (Dataset row)
+foreign import java unsafe describe :: (t <: Object) => JStringArray -> Java (Dataset t) (Dataset row)
 
-foreign import java unsafe distinct :: (t <: Object) => Seq JString -> Java (Dataset t) (Dataset t)
+foreign import java unsafe distinct :: (t <: Object) => Java (Dataset t) (Dataset t)
 
 foreign import java unsafe drop :: (t <: Object) => Column -> Java (Dataset t) (Dataset row)
 
-foreign import java unsafe drop2 :: (t <: Object) => Seq JString -> Java (Dataset t) (Dataset row)
+-- foreign import java unsafe drop2 :: (t <: Object) => Seq JString -> Java (Dataset t) (Dataset row)
 
-foreign import java unsafe drop3 :: (t <: Object) => JStringArray -> Java (Dataset t) (Dataset row)
+foreign import java unsafe "drop" drop2 :: (t <: Object) => JStringArray -> Java (Dataset t) (Dataset row)
 
-foreign import java unsafe drop4 :: (t <: Object) => JString -> Java (Dataset t) (Dataset row)
+foreign import java unsafe "drop" drop3 :: (t <: Object) => JString -> Java (Dataset t) (Dataset row)
 
 foreign import java unsafe dropDuplicates :: (t <: Object) => Java (Dataset t) (Dataset t)
 
-foreign import java unsafe dropDuplicates2 :: (t <: Object) => Seq JString -> Java (Dataset t) (Dataset t)
+-- foreign import java unsafe dropDuplicates2 :: (t <: Object) => Seq JString -> Java (Dataset t) (Dataset t)
 
-foreign import java unsafe dropDuplicates3 :: (t <: Object) => JStringArray -> Java (Dataset t) (Dataset t)
+foreign import java unsafe "dropDuplicates" dropDuplicates2 :: (t <: Object) => JStringArray -> Java (Dataset t) (Dataset t)
 
-foreign import java unsafe dropDuplicates4 :: (t <: Object)
-                                          => JString -> Seq JString -> Java (Dataset t) (Dataset t)
+-- foreign import java unsafe dropDuplicates4 :: (t <: Object)
+--                                           => JString -> Seq JString -> Java (Dataset t) (Dataset t)
 
-foreign import java unsafe dropDuplicates5 :: (t <: Object)
+foreign import java unsafe "dropDuplicates" dropDuplicates3 :: (t <: Object)
                                            => JString -> JStringArray -> Java (Dataset t) (Dataset t)
 
 foreign import java unsafe dtypes :: (t <: Object) => Java (Dataset t) (Tuple2 JString JString)
