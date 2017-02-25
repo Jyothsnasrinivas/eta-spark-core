@@ -1,15 +1,17 @@
 {-# LANGUAGE MagicHash #-}
 
-module Spark.Core.JavaNewHadoopRDD where
+module Spark.Core.JavaNewHadoopRDD
+  ( module X
+  , module Spark.Core.JavaNewHadoopRDD )
+where
 
 import Java
+import Spark.Core.Internal.Types
 import qualified Spark.Core.Internal.JavaNewHadoopRDD as S
+import qualified Spark.Core.Internal.JavaNewHadoopRDD as X hiding (mapPartitionWithInputSplit)
 
-data {-# CLASS "org.apache.spark.api.java.JavaNewHadoopRDD" #-} JavaNewHadoopRDD k v = JavaNewHadoopRDD (Object# (JavaNewHadoopRDD k v)
-  deriving Class
-
-foreign import java unsafe kClassTag :: (k <: Object, v <: Object) => Java (JavaNewHadoopRDD k v) (ClassTag k)
-
-foreign import java unsafe mapPartitionWithInputSplit :: (k <: Object, v <: Object, r <: Object) => Function2 InputSplit (Iterator (Tuple2 k v)) -> Iterator r -> Bool -> Java (JavaNewHadoopRDD k v) (ClassTag k)
---Todo
-foreign import java unsafe vClassTag :: (k <: Object, v <: Object) => Java (JavaNewHadoopRDD k v) (ClassTag v)
+mapPartitionWithInputSplit :: (k <: Object, v <: Object, r <: Object)
+                          => (forall a. NewInputSplit -> (Iterator (Tuple2 k v)) -> Java a (Iterator r))
+                          -> Bool
+                          -> Java (JavaNewHadoopRDD k v) (JavaRDD r)
+mapPartitionWithInputSplit t1 t2 = S.mapPartitionWithInputSplit (mkFun2 t1) t2

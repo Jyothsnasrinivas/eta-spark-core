@@ -12,11 +12,11 @@ foreign import java unsafe cartesian :: (t <: Object, this <: JavaRDDLike t this
 
 foreign import java unsafe checkpoint :: (t <: Object, this <: JavaRDDLike t this) => Java this ()
 
-foreign import java unsafe classTag :: (t <: Object, this <: JavaRDDLike t this) => Java this (ClassTag t)
+-- foreign import java unsafe classTag :: (t <: Object, this <: JavaRDDLike t this) => Java this (ClassTag t) --Todo
 
 foreign import java unsafe collect :: (t <: Object, this <: JavaRDDLike t this) => Java this (List t)
 
-foreign import java unsafe collectAsync :: (t <: Object, this <: JavaRDDLike t this) => Java this (JavaFutureAction List t)
+foreign import java unsafe collectAsync :: (t <: Object, this <: JavaRDDLike t this) => Java this (JavaFutureAction (List t))
 
 foreign import java unsafe collectPartitions :: (t <: Object, this <: JavaRDDLike t this) => JIntArray -> Java this (ListArray t)
 
@@ -42,7 +42,7 @@ foreign import java unsafe first:: (t <: Object, this <: JavaRDDLike t this) => 
 
 foreign import java unsafe flatMap :: (t <: Object, this <: JavaRDDLike t this, u <: Object) => FlatMapFunction t u -> Java this (JavaRDD u)
 
-foreign import java unsafe flatMapToDouble :: (t <: Object, this <: JavaRDDLike t this) => DoubleFlatMapFunction -> Java this JavaDoubleRDD
+foreign import java unsafe flatMapToDouble :: (t <: Object, this <: JavaRDDLike t this) => DoubleFlatMapFunction t -> Java this JavaDoubleRDD
 
 foreign import java unsafe flatMapToPair :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object) => PairFlatMapFunction t k2 v2 -> Java this (JavaPairRDD k2 v2)
 
@@ -80,13 +80,15 @@ foreign import java unsafe keyBy :: (t <: Object, this <: JavaRDDLike t this, u 
 
 foreign import java unsafe map :: (t <: Object, this <: JavaRDDLike t this, r <: Object) => Function t r -> Java this (JavaRDD r)
 
-foreign import java unsafe mapPartitions :: (t <: Object, this <: JavaRDDLike t this, u <: Object) => FlatMapFunction (Iterator t) u -> Java this (JavaRDD u)
+foreign import java unsafe mapPartitions :: (t <: Object, this <: JavaRDDLike t this, u <: Object)
+                                         => FlatMapFunction (Iterator t) u -> Java this (JavaRDD u)
 
 foreign import java unsafe mapPartitions2 :: (t <: Object, this <: JavaRDDLike t this, u <: Object) => FlatMapFunction (Iterator t) u -> Bool -> Java this (JavaRDD u)
 
 foreign import java unsafe mapPartitionsToDouble :: (t <: Object, this <: JavaRDDLike t this) => DoubleFlatMapFunction (Iterator t) -> Java this JavaDoubleRDD
 
-foreign import java unsafe mapPartitionsToDouble2 :: (t <: Object, this <: JavaRDDLike t this) => DoubleFlatMapFunction (Iterator t) -> Bool -> Java this JavaDoubleRDD
+foreign import java unsafe mapPartitionsToDouble2 :: (t <: Object, this <: JavaRDDLike t this)
+                                                  => DoubleFlatMapFunction (Iterator t) -> Bool -> Java this JavaDoubleRDD
 
 foreign import java unsafe mapPartitionsToPair :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object)
                                               => PairFlatMapFunction (Iterator t) k2 v2 -> Java this (JavaPairRDD k2 v2)
@@ -97,7 +99,7 @@ foreign import java unsafe mapPartitionsToPair2 :: (t <: Object, this <: JavaRDD
 foreign import java unsafe mapPartitionsWithIndex :: (t <: Object, this <: JavaRDDLike t this, r <: Object)
                                                   => Function2 JInteger (Iterator t) (Iterator r) -> Bool -> Java this (JavaRDD r)
 
-foreign import java unsafe mapToDouble :: (t <: Object, this <: JavaRDDLike t this, r <: Object) => DoubleFunction -> Java this JavaDoubleRDD
+foreign import java unsafe mapToDouble :: (t <: Object, this <: JavaRDDLike t this, r <: Object) => DoubleFunction t -> Java this JavaDoubleRDD
 
 foreign import java unsafe mapToPair :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object)
                                      => PairFunction t k2 v2 -> Java this (JavaPairRDD k2 v2)
@@ -132,7 +134,7 @@ foreign import java unsafe saveAsObjectFile :: (t <: Object, this <: JavaRDDLike
 
 foreign import java unsafe saveAsTextFile :: (t <: Object, this <: JavaRDDLike t this) => JString -> Java this ()
 
-foreign import java unsafe saveAsTextFile :: (t <: Object, this <: JavaRDDLike t this, b <: CompressionCodec) => JString -> Class b -> Java this ()
+foreign import java unsafe "saveAsTextFile" saveAsTextFile2 :: (t <: Object, this <: JavaRDDLike t this, b <: CompressionCodec) => JString -> JClass b -> Java this ()
 
 foreign import java unsafe take :: (t <: Object, this <: JavaRDDLike t this) => Int -> Java this (List t)
 

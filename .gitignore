@@ -1,3 +1,4 @@
 dist
 *.jar
 *.hi
+.idea

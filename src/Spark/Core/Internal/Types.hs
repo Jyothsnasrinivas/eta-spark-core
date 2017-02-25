@@ -29,6 +29,45 @@ data {-# CLASS "org.apache.spark.api.java.JavaRDD[]" #-} JavaRDDArray t = JavaRD
 
 instance JArray (JavaRDD t) (JavaRDDArray t)
 
+data {-# CLASS "org.apache.spark.rdd.RDD" #-} RDD t = RDD (Object# (RDD t))
+  deriving Class
+
+data {-# CLASS "org.apache.spark.storage.StorageLevel" #-} StorageLevel = StorageLevel (Object# StorageLevel)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.api.java.JavaFutureAction" #-} JavaFutureAction t = JavaFutureAction (Object# (JavaFutureAction t))
+  deriving Class
+
+data {-# CLASS "org.apache.spark.SparkContext" #-} SparkContext = SparkContext (Object# SparkContext)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.partial.PartialResult" #-} PartialResult r = PartialResult (Object# (PartialResult r))
+  deriving Class
+
+data {-# CLASS "org.apache.spark.partial.BoundedDouble" #-} BoundedDouble = BoundedDouble (Object# BoundedDouble)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.api.java.Optional" #-} Optional t = Optional (Object# (Optional t))
+  deriving Class
+
+data {-# CLASS "org.apache.spark.Partition" #-} Partition = Partition (Object# Partition)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.TaskContext" #-} TaskContext = TaskContext (Object# TaskContext)
+  deriving Class
+
+data {-# CLASS "java.util.Comparator" #-} Comparator t = Comparator (Object# (Comparator t))
+  deriving Class
+
+data {-# CLASS "org.apache.spark.Partitioner" #-} Partitioner = Partitioner (Object# Partitioner)
+  deriving Class
+
+data {-# CLASS "org.apache.hadoop.io.compress.CompressionCodec" #-} CompressionCodec = CompressionCodec (Object# CompressionCodec)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.util.StatCounter" #-} StatCounter = StatCounter (Object# StatCounter)
+  deriving Class
+
 data {-# CLASS "org.apache.spark.api.java.function.CoGroupFunction" #-}
   CoGroupFunction k v1 v2 r = CoGroupFunction (Object# (CoGroupFunction k v1 v2 r))
   deriving Class
@@ -53,7 +92,7 @@ data {-# CLASS "org.apache.spark.api.java.function.DoubleFunction" #-}
 
 foreign import java unsafe "@wrapper call" mkDoubleFun
               :: (t <: Object)
-              => (t -> Java (DoubleFunction t) (Iterator Double))
+              => (t -> Java (DoubleFunction t) (Iterator JDouble))
               -> DoubleFunction t
 
 data {-# CLASS "org.apache.spark.api.java.function.FilterFunction" #-}
@@ -115,18 +154,15 @@ data {-# CLASS "org.apache.spark.api.java.function.Function" #-}
   deriving Class
 
 foreign import java unsafe "@wrapper call" mkFun
-              :: (t1 <: Object, r <: Object )
-              => (t1 -> Java (Function t1 r) (r))
+              :: (t1 <: Object, r <: Object)
+              => (t1 -> Java (Function t1 r) r)
               -> Function t1 r
 
 data {-# CLASS "org.apache.spark.api.java.function.Function0" #-}
   Function0 r = Function0 (Object# (Function0 r))
   deriving Class
 
-foreign import java unsafe "@wrapper call" mkFun0
-              :: (r <: Object)
-              => (Java (Function0 r) (r))
-              -> Function0 r
+foreign import java unsafe "@wrapper call" mkFun0 :: (r <: Object) => Java (Function0 r) r -> Function0 r
 
 data {-# CLASS "org.apache.spark.api.java.function.Function2" #-}
   Function2 t1 t2 r = Function2 (Object# (Function2 t1 t2 r))
@@ -134,7 +170,7 @@ data {-# CLASS "org.apache.spark.api.java.function.Function2" #-}
 
 foreign import java unsafe "@wrapper call" mkFun2
               :: (t1 <: Object, t2 <: Object, r <: Object)
-              => (t1 -> t2 -> Java (Function2 t1 t2 r) (r))
+              => (t1 -> t2 -> Java (Function2 t1 t2 r) r)
               -> Function2 t1 t2 r
 
 data {-# CLASS "org.apache.spark.api.java.function.Function3" #-}
@@ -143,7 +179,7 @@ data {-# CLASS "org.apache.spark.api.java.function.Function3" #-}
 
 foreign import java unsafe "@wrapper call" mkFun3
               :: (t1 <: Object, t2 <: Object, t3 <: Object, r <: Object)
-              => (t1 -> t2 -> t3 -> Java (Function3 t1 t2 t3 r) (r))
+              => (t1 -> t2 -> t3 -> Java (Function3 t1 t2 t3 r) r)
               -> Function3 t1 t2 t3 r
 
 data {-# CLASS "org.apache.spark.api.java.function.Function4" #-}
@@ -152,7 +188,7 @@ data {-# CLASS "org.apache.spark.api.java.function.Function4" #-}
 
 foreign import java unsafe "@wrapper call" mkFun4
               :: (t1 <: Object, t2 <: Object, t3 <: Object, t4 <: Object, r <: Object)
-              => (t1 -> t2 -> t3 -> t4 -> Java (Function4 t1 t2 t3 t4 r) (r))
+              => (t1 -> t2 -> t3 -> t4 -> Java (Function4 t1 t2 t3 t4 r) r)
               -> Function4 t1 t2 t3 t4 r
 
 data {-# CLASS "org.apache.spark.api.java.function.MapFunction" #-}
@@ -170,7 +206,7 @@ data {-# CLASS "org.apache.spark.api.java.function.MapGroupsFunction" #-}
 
 foreign import java unsafe "@wrapper call" mkMapGroupsFun
               :: (k <: Object, v <: Object, r <: Object)
-              => (k -> Iterator v -> Java (MapGroupsFunction k v r) (r))
+              => (k -> Iterator v -> Java (MapGroupsFunction k v r) r)
               -> MapGroupsFunction k v r
 
 data {-# CLASS "org.apache.spark.api.java.function.MapPartitionsFunction" #-}
@@ -178,7 +214,7 @@ data {-# CLASS "org.apache.spark.api.java.function.MapPartitionsFunction" #-}
   deriving Class
 
 foreign import java unsafe "@wrapper call" mkMapPartitionsFun
-              :: (t <: Object, u <: Object )
+              :: (t <: Object, u <: Object)
               => (t -> Java (MapPartitionsFunction t u) (Iterator u))
               -> MapPartitionsFunction t u
 
@@ -206,7 +242,7 @@ data {-# CLASS "org.apache.spark.api.java.function.ReduceFunction" #-}
 
 foreign import java unsafe "@wrapper call" mkReduceFun
               :: (t <: Object)
-              => (t -> t -> Java (ReduceFunction t) (t))
+              => (t -> t -> Java (ReduceFunction t) t)
               -> ReduceFunction t
 
 data {-# CLASS "org.apache.spark.api.java.function.VoidFunction" #-}
@@ -226,6 +262,27 @@ foreign import java unsafe "@wrapper call" mkVoidFun2
               :: (t1 <: Object, t2 <: Object)
               => (t1 -> t2 -> Java (VoidFunction2 t1 t2) ())
               -> VoidFunction2 t1 t2
-              
+
 data {-# CLASS "scala.Tuple2" #-} Tuple2 k v = Tuple2 (Object# (Tuple2 k v))
+  deriving Class
+
+data {-# CLASS "scala.Tuple3" #-} Tuple3 k v r = Tuple3 (Object# (Tuple3 k v r))
+  deriving Class
+
+data {-# CLASS "scala.Tuple4" #-} Tuple4 k v r t = Tuple4 (Object# (Tuple4 k v r t))
+  deriving Class
+
+data {-# CLASS "scala.Tuple5" #-} Tuple5 k v r t s = Tuple5 (Object# (Tuple5 k v r t s))
+  deriving Class
+
+data {-# CLASS "org.apache.spark.serializer.Serializer" #-} Serializer = Serializer (Object# Serializer)
+  deriving Class
+
+data {-# CLASS "org.apache.hadoop.mapred.JobConf" #-} JobConf = JobConf (Object# JobConf)
+  deriving Class
+
+data {-# CLASS "org.apache.hadoop.mapreduce.InputSplit" #-} NewInputSplit = NewInputSplit (Object# NewInputSplit)
+  deriving Class
+
+data {-# CLASS "org.apache.hadoop.mapred.InputSplit" #-} InputSplit = InputSplit (Object# InputSplit)
   deriving Class

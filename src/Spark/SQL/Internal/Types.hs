@@ -44,3 +44,30 @@ data {-# CLASS "org.apache.spark.sql.expressions.WindowSpec" #-} WindowSpec = Wi
 
 data {-# CLASS "org.apache.spark.sql.RelationalGroupedDataset" #-} RelationalGroupedDataset = RelationalGroupedDataset (Object# RelationalGroupedDataset)
   deriving Class
+
+data {-# CLASS "org.apache.spark.sql.KeyValueGroupedDataset" #-} KeyValueGroupedDataset k v = KeyValueGroupedDataset (Object# (KeyValueGroupedDataset k v))
+  deriving Class
+
+data {-# CLASS "org.apache.spark.sql.DataFrameNaFunctions" #-} DataFrameNaFunctions = DataFrameNaFunctions (Object# DataFrameNaFunctions)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.sql.SparkSession" #-} SparkSession = SparkSession (Object# SparkSession)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.sql.catalyst.plans.logical.LogicalPlan" #-} LogicalPlan = LogicalPlan (Object# LogicalPlan)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.sql.execution.QueryExecution" #-} QueryExecution = QueryExecution (Object# QueryExecution)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.sql.types.StructType" #-} StructType = StructType (Object# StructType)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.sql.SQLContext" #-} SQLContext = SQLContext (Object# SQLContext)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.sql.DataFrameStatFunctions" #-} DataFrameStatFunctions = DataFrameStatFunctions (Object# DataFrameStatFunctions)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.sql.DataFrameWriter" #-} DataFrameWriter t = DataFrameWriter (Object# (DataFrameWriter t))
+  deriving Class

@@ -29,6 +29,7 @@ library
                      Spark.Core.JavaPairRDD
                      Spark.Core.JavaRDD
                      Spark.Core.JavaRDDLike
+                     Spark.SQL.Internal.Column
                      Spark.SQL.Internal.Dataset
                      Spark.SQL.Internal.Types
                      Spark.SQL.Dataset
@@ -39,6 +40,8 @@ library
                        MagicHash
                        MultiParamTypeClasses
                        FlexibleContexts
+                       RankNTypes
+                       AllowAmbiguousTypes
   build-depends:       base >=4.8 && <4.9
   hs-source-dirs:      src
   default-language:    Haskell2010

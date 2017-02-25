@@ -33,11 +33,11 @@ foreign import java unsafe mean :: Java JavaDoubleRDD JDouble
 
 foreign import java unsafe meanApprox :: Int64 -> Java JavaDoubleRDD (PartialResult BoundedDouble)
 
-foreign import java unsafe meanApprox :: Int64 -> JDouble -> Java JavaDoubleRDD (PartialResult BoundedDouble)
+foreign import java unsafe "meanApprox" meanApprox2 :: Int64 -> JDouble -> Java JavaDoubleRDD (PartialResult BoundedDouble)
 
 foreign import java unsafe min :: Java JavaDoubleRDD JDouble
 
-foreign import java unsafe persist :: StorageLevel newLevel -> Java JavaDoubleRDD JavaDoubleRDD
+foreign import java unsafe persist :: StorageLevel -> Java JavaDoubleRDD JavaDoubleRDD
 
 foreign import java unsafe popStdev :: Java JavaDoubleRDD JDouble
 
@@ -65,9 +65,9 @@ foreign import java unsafe stdev :: Java JavaDoubleRDD JDouble
 
 foreign import java unsafe subtract :: JavaDoubleRDD -> Java JavaDoubleRDD JavaDoubleRDD
 
-foreign import java unsafe subtract2 :: JavaDoubleRDD -> Int -> Java JavaDoubleRDD JavaDoubleRDD
+foreign import java unsafe "subtract" subtract2 :: JavaDoubleRDD -> Int -> Java JavaDoubleRDD JavaDoubleRDD
 
-foreign import java unsafe subtract :: JavaDoubleRDD -> Partitioner -> Java JavaDoubleRDD JavaDoubleRDD
+foreign import java unsafe "subtract" subtract3 :: JavaDoubleRDD -> Partitioner -> Java JavaDoubleRDD JavaDoubleRDD
 
 foreign import java unsafe sum :: Java JavaDoubleRDD JDouble
 
