@@ -67,8 +67,6 @@ foreign import java unsafe "@interface jobIds" jobIds :: Java (JavaFutureAction 
 data {-# CLASS "org.apache.spark.SparkContext" #-} SparkContext = SparkContext (Object# SparkContext)
   deriving Class
 
-
-
 data {-# CLASS "org.apache.spark.partial.PartialResult" #-} PartialResult r = PartialResult (Object# (PartialResult r))
   deriving Class
 
