@@ -2,6 +2,7 @@
 module Spark.SQL.Dataset where
 
 import Java
+import Scala
 import Spark.SQL.Internal.Types
 import qualified Spark.SQL.Internal.Dataset as S
 
@@ -120,7 +121,7 @@ dropDuplicates3 t1 t2 = S.dropDuplicates3 t1 (toJava t2)
 -- foreign import java unsafe dropDuplicates5 :: (t <: Object)
 --                                            => JString -> JStringArray -> Java (Dataset t) (Dataset t)
 dtypes :: (t <: Object) => Java (Dataset t) (JString, JString)
-dtypes = undefined --fmap fromJava S.dtypes
+dtypes = fmap fromJava S.dtypes
 
 -- foreign import java unsafe dtypes :: (t <: Object) => Java (Dataset t) (Tuple2 JString JString)
 

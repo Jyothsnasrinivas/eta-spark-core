@@ -26,8 +26,8 @@ foreign import java unsafe collect :: (t <: Object, this <: JavaRDDLike t this) 
 
 foreign import java unsafe collectAsync :: (t <: Object, this <: JavaRDDLike t this) => Java this (JavaFutureAction (List t))
 
-collectPartitions :: (t <: Object, this <: JavaRDDLike t this) => [Int] -> Java this [[t]]
-collectPartitions t = undefined --fmap (Prelude.map fromJava . fromJava) $ S.collectPartitions (toJava t)
+collectPartitions :: forall t this  . (t <: Object, this <: JavaRDDLike t this) => [Int] -> Java this [[t]]
+collectPartitions t = fmap (Prelude.map fromJava . (fromJava :: ListArray t -> [List t])) $ S.collectPartitions (toJava t)
 
 --foreign import java unsafe collectPartitions :: (t <: Object, this <: JavaRDDLike t this) => JIntArray -> Java this (ListArray t)
 
@@ -151,10 +151,10 @@ mapPartitions t = S.mapPartitions (mkFlatMapFun t)
 --foreign import java unsafe mapPartitions :: (t <: Object, this <: JavaRDDLike t this, u <: Object) => FlatMapFunction (Iterator t) u -> Java this (JavaRDD u)
 
 mapPartitions2 :: (t <: Object, this <: JavaRDDLike t this, u <: Object)
-              => (forall a. t -> Java a (Iterator u))
+              => (forall a. Iterator t -> Java a (Iterator u))
               -> Bool
               -> Java this (JavaRDD u)
-mapPartitions2 t1 t2 = undefined --S.mapPartitions (mkFlatMapFun t1) t2
+mapPartitions2 t1 t2 = S.mapPartitions2 (mkFlatMapFun t1) t2
 
 --foreign import java unsafe mapPartitions2 :: (t <: Object, this <: JavaRDDLike t this, u <: Object) => FlatMapFunction (Iterator t) u -> Bool -> Java this (JavaRDD u)
 
@@ -182,10 +182,10 @@ mapPartitionsToPair t = S.mapPartitionsToPair (mkPairFlatMapFun t)
 --                                               => PairFlatMapFunction (Iterator t) k2 v2 -> Java this (JavaPairRDD k2 v2)
 
 mapPartitionsToPair2 :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object)
-                    => (forall a. t -> Java a (Iterator (Tuple2 k2 v2)))
+                    => (forall a. Iterator t -> Java a (Iterator (Tuple2 k2 v2)))
                     -> Bool
                     -> Java this (JavaPairRDD k2 v2)
-mapPartitionsToPair2 t1 t2 = undefined --S.mapPartitionsToPair2 (mkPairFlatMapFun t1) t2
+mapPartitionsToPair2 t1 t2 = S.mapPartitionsToPair2 (mkPairFlatMapFun t1) t2
 
 -- foreign import java unsafe mapPartitionsToPair2 :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object)
 --                                                => PairFlatMapFunction (Iterator t) k2 v2 -> Bool -> Java this (JavaPairRDD k2 v2)
@@ -199,10 +199,10 @@ mapPartitionsWithIndex t1 t2 = S.mapPartitionsWithIndex (mkFun2 t1) t2
 -- foreign import java unsafe mapPartitionsWithIndex :: (t <: Object, this <: JavaRDDLike t this, r <: Object)
 --                                                   => Function2 JInteger (Iterator t) (Iterator r) -> Bool -> Java this (JavaRDD r)
 
-mapToDouble :: (t <: Object, this <: JavaRDDLike t this, r <: Object)
+mapToDouble :: (t <: Object, this <: JavaRDDLike t this)
             => (forall a. t -> Java a (Iterator JDouble))
             -> Java this JavaDoubleRDD
-mapToDouble t = undefined -- S.mapToDouble (mkDoubleFun t)
+mapToDouble t = S.mapToDouble (mkDoubleFun t)
 
 --foreign import java unsafe mapToDouble :: (t <: Object, this <: JavaRDDLike t this, r <: Object) => DoubleFunction -> Java this JavaDoubleRDD
 

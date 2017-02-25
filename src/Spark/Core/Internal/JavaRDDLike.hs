@@ -99,7 +99,7 @@ foreign import java unsafe mapPartitionsToPair2 :: (t <: Object, this <: JavaRDD
 foreign import java unsafe mapPartitionsWithIndex :: (t <: Object, this <: JavaRDDLike t this, r <: Object)
                                                   => Function2 JInteger (Iterator t) (Iterator r) -> Bool -> Java this (JavaRDD r)
 
-foreign import java unsafe mapToDouble :: (t <: Object, this <: JavaRDDLike t this, r <: Object) => DoubleFunction t -> Java this JavaDoubleRDD
+foreign import java unsafe mapToDouble :: (t <: Object, this <: JavaRDDLike t this) => DoubleFunction t -> Java this JavaDoubleRDD
 
 foreign import java unsafe mapToPair :: (t <: Object, this <: JavaRDDLike t this, k2 <: Object, v2 <: Object)
                                      => PairFunction t k2 v2 -> Java this (JavaPairRDD k2 v2)

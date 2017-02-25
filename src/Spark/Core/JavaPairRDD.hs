@@ -79,8 +79,9 @@ combineByKey4 :: (k <: Object, v <: Object, c <: Object) => (forall a. v -> Java
                                                          -> Java (JavaPairRDD k v) (JavaPairRDD k c)
 combineByKey4 t1 t2 t3 t4 t5 t6 = S.combineByKey4 (mkFun t1) (mkFun2 t2) (mkFun2 t3) t4 t5 t6
 
-countByKey :: (k <: Object, v <: Object) => Java (JavaPairRDD k v) [(k, Int64)]
-countByKey = undefined -- fmap (map (fromJava . snd) . fromJava) S.countByKey
+countByKey :: forall k v. (k <: Object, v <: Object) => Java (JavaPairRDD k v) [(k, Int64)]
+countByKey = fmap toList S.countByKey
+  where toList = map (\(k, l) -> (k, fromJava l)) . (fromJava :: Map k JLong -> [(k, JLong)])
 
 filter :: (k <: Object, v <: Object) => (forall a. Tuple2 k v -> Java a JBoolean)
                                      -> Java (JavaPairRDD k v) (JavaPairRDD k v)

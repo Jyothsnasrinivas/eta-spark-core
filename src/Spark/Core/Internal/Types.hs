@@ -1,10 +1,21 @@
 {-# LANGUAGE MagicHash #-}
-module Spark.Core.Internal.Types where
+module Spark.Core.Internal.Types
+  (module Spark.Core.Internal.Types,
+  module Scala)
+where
 
 import Java
+import Scala
 
 data {-# CLASS "java.util.List[]" #-} ListArray t = ListArray (Object# (ListArray t))
   deriving Class
+
+instance JArray (List t) (ListArray t)
+
+data {-# CLASS "scala.Tuple2[]" #-} Tuple2Array t1 t2 = Tuple2Array (Object# (Tuple2Array t1 t2))
+  deriving Class
+
+instance JArray (Tuple2 t1 t2) (Tuple2Array t1 t2)
 
 data {-# CLASS "org.apache.spark.api.java.JavaRDD" #-} JavaRDD t = JavaRDD (Object# (JavaRDD t))
   deriving Class
@@ -279,18 +290,6 @@ foreign import java unsafe "@wrapper call" mkVoidFun2
               :: (t1 <: Object, t2 <: Object)
               => (t1 -> t2 -> Java (VoidFunction2 t1 t2) ())
               -> VoidFunction2 t1 t2
-
-data {-# CLASS "scala.Tuple2" #-} Tuple2 k v = Tuple2 (Object# (Tuple2 k v))
-  deriving Class
-
-data {-# CLASS "scala.Tuple3" #-} Tuple3 k v r = Tuple3 (Object# (Tuple3 k v r))
-  deriving Class
-
-data {-# CLASS "scala.Tuple4" #-} Tuple4 k v r t = Tuple4 (Object# (Tuple4 k v r t))
-  deriving Class
-
-data {-# CLASS "scala.Tuple5" #-} Tuple5 k v r t s = Tuple5 (Object# (Tuple5 k v r t s))
-  deriving Class
 
 data {-# CLASS "org.apache.spark.serializer.Serializer" #-} Serializer = Serializer (Object# Serializer)
   deriving Class

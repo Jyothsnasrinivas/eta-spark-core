@@ -23,4 +23,4 @@ histogram2 :: [Double] -> Bool -> Java JavaDoubleRDD [Int64]
 histogram2 t1 t2 = fmap fromJava $ S.histogram2 (toJava t1) t2
 
 histogram3 :: Int -> Java JavaDoubleRDD (JDoubleArray, JLongArray)
-histogram3 t = undefined--fmap fromJava $ S.histogram3 t
+histogram3 t = fmap fromJava $ S.histogram3 t
