@@ -10,7 +10,7 @@ foreign import java unsafe "textFile" textFile :: JString -> Int -> Java SparkCo
 
 foreign import java unsafe stop :: Java SparkContext ()
 
-foreign import java unsafe cache :: (Extends t Object) => RDD t (JavaRDD t)
+-- foreign import java unsafe cache :: (Extends t Object) => RDD t (JavaRDD t)
 
 foreign import java unsafe addFile :: JString -> Java SparkContext ()
 
@@ -42,7 +42,7 @@ foreign import java unsafe collectionAccumulator :: (t <: Object)
                                                  => Java SparkContext (CollectionAccumulator t)
 
 foreign import java unsafe collectionAccumulator2 :: (t <: Object)
-                                                  => Jstring
+                                                  => JString
                                                   -> Java SparkContext (CollectionAccumulator t)
 
 foreign import java unsafe defaultMinPartitions :: Java SparkContext Int
@@ -55,7 +55,7 @@ foreign import java unsafe doubleAccumulator :: Java SparkContext DoubleAccumula
 
 foreign import java unsafe doubleAccumulator2 :: JString -> Java SparkContext DoubleAccumulator
 
-foreign import java unsafe files :: Java SparkContext (Seq JString)
+-- foreign import java unsafe files :: Java SparkContext (Seq JString)
 
 foreign import java unsafe getCheckpointDir :: Java SparkContext (Option JString)
 
@@ -100,8 +100,6 @@ foreign import java unsafe sparkUser :: Java SparkContext JString
 foreign import java unsafe sparkTime :: Java SparkContext Int64
 
 foreign import java unsafe statusTracker :: Java SparkContext SparkStatusTracker
-
-foreign import java unsafe stop :: Java SparkContext ()
 
 foreign import java unsafe uiWebUrl :: Java SparkContext (Option JString)
 

@@ -54,7 +54,7 @@ foreign import java unsafe count :: Java StatCounter Int64
 
 foreign import java unsafe max :: Java StatCounter Double
 
-foreign import java unsafe mean :: Java StatCounter Double
+foreign import java unsafe "mean" mean2 :: Java StatCounter Double
 
 foreign import java unsafe merge :: Double -> Java StatCounter StatCounter
 

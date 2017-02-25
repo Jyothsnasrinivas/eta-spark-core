@@ -94,6 +94,33 @@ data {-# CLASS "org.apache.hadoop.io.compress.CompressionCodec" #-} CompressionC
 data {-# CLASS "org.apache.spark.util.StatCounter" #-} StatCounter = StatCounter (Object# StatCounter)
   deriving Class
 
+data {-# CLASS "org.apache.spark.SparkConf" #-} SparkConf = SparkConf (Object# SparkConf)
+  deriving Class
+
+data {-# CLASS "scala.Option" #-} Option t = Option (Object# (Option t))
+  deriving Class
+
+data {-# CLASS "org.apache.spark.input.PortableDataStream" #-} PortableDataStream = PortableDataStream (Object# PortableDataStream)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.util.CollectionAccumulator" #-} CollectionAccumulator t = CollectionAccumulator (Object# (CollectionAccumulator t))
+  deriving Class
+
+data {-# CLASS "org.apache.spark.util.DoubleAccumulator" #-} DoubleAccumulator = DoubleAccumulator (Object# DoubleAccumulator)
+  deriving Class
+
+data {-# CLASS "scala.Enumeration.Value" #-} Value = Value (Object# Value)
+  deriving Class
+
+data {-# CLASS "org.apache.hadoop.conf.Configuration" #-} Configuration = Configuration (Object# Configuration)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.util.LongAccumulator" #-} LongAccumulator = LongAccumulator (Object# LongAccumulator)
+  deriving Class
+
+data {-# CLASS "org.apache.spark.SparkStatusTracker" #-} SparkStatusTracker = SparkStatusTracker (Object# SparkStatusTracker)
+  deriving Class
+
 data {-# CLASS "org.apache.spark.api.java.function.CoGroupFunction" #-}
   CoGroupFunction k v1 v2 r = CoGroupFunction (Object# (CoGroupFunction k v1 v2 r))
   deriving Class

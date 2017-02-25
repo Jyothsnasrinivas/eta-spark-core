@@ -23,6 +23,9 @@ library
                      Spark.Core.Internal.JavaRDD
                      Spark.Core.Internal.JavaRDDLike
                      Spark.Core.Internal.Types
+                     Spark.Core.Internal.Methods
+                     Spark.Core.Internal.SparkContext
+                     Spark.Core.Internal.SparkConf
                      Spark.Core.JavaDoubleRDD
                      Spark.Core.JavaHadoopRDD
                      Spark.Core.JavaNewHadoopRDD
@@ -33,6 +36,7 @@ library
                      Spark.SQL.Internal.Dataset
                      Spark.SQL.Internal.Types
                      Spark.SQL.Dataset
+
 
   -- other-modules:
   -- other-extensions:

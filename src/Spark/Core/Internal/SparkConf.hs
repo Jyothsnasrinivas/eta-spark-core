@@ -64,15 +64,15 @@ foreign import java unsafe "getTimeAsSeconds" getTimeAsSeconds2 :: JString -> JS
 
 foreign import java unsafe remove :: JString -> Java SparkConf SparkConf
 
-foreign import java unsafe set :: JString -> JString -> Java SparkConf SparkConf
+-- foreign import java unsafe set :: JString -> JString -> Java SparkConf SparkConf
 
-foreign import java unsafe setAppName :: JString -> Java SparkConf SparkConf
+-- foreign import java unsafe setAppName :: JString -> Java SparkConf SparkConf
 
 foreign import java unsafe setExecutorEnv :: JString -> JString -> Java SparkConf SparkConf
 
 foreign import java unsafe setIfMissing :: JString -> JString -> Java SparkConf SparkConf
 
-foreign import java unsafe setJars :: StringArray -> Java SparkConf SparkConf
+foreign import java unsafe setJars :: JStringArray -> Java SparkConf SparkConf
 
 foreign import java unsafe setMaster :: JString -> Java SparkConf SparkConf
 
