@@ -35,11 +35,28 @@ data {-# CLASS "org.apache.spark.rdd.RDD" #-} RDD t = RDD (Object# (RDD t))
 data {-# CLASS "org.apache.spark.storage.StorageLevel" #-} StorageLevel = StorageLevel (Object# StorageLevel)
   deriving Class
 
+foreign import java unsafe "@static org.apache.spark.storage.StorageLevel.NONE" nONE :: StorageLevel
+foreign import java unsafe "@static org.apache.spark.storage.StorageLevel.DISK_ONLY" dISK_ONLY :: StorageLevel
+foreign import java unsafe "@static org.apache.spark.storage.StorageLevel.DISK_ONLY_2" dISK_ONLY_2 :: StorageLevel
+foreign import java unsafe "@static org.apache.spark.storage.StorageLevel.MEMORY_ONLY" mEMORY_ONLY :: StorageLevel
+foreign import java unsafe "@static org.apache.spark.storage.StorageLevel.MEMORY_ONLY_2" mEMORY_ONLY_2 :: StorageLevel
+foreign import java unsafe "@static org.apache.spark.storage.StorageLevel.MEMORY_ONLY_SER" mEMORY_ONLY_SER :: StorageLevel
+foreign import java unsafe "@static org.apache.spark.storage.StorageLevel.MEMORY_ONLY_SER_2" mEMORY_ONLY_SER_2 :: StorageLevel
+foreign import java unsafe "@static org.apache.spark.storage.StorageLevel.MEMORY_AND_DISK" mEMORY_AND_DISK :: StorageLevel
+foreign import java unsafe "@static org.apache.spark.storage.StorageLevel.MEMORY_AND_DISK_2" mEMORY_AND_DISK_2 :: StorageLevel
+foreign import java unsafe "@static org.apache.spark.storage.StorageLevel.MEMORY_AND_DISK_SER" mEMORY_AND_DISK_SER :: StorageLevel
+foreign import java unsafe "@static org.apache.spark.storage.StorageLevel.MEMORY_AND_DISK_SER_2" mEMORY_AND_DISK_SER_2 :: StorageLevel
+foreign import java unsafe "@static org.apache.spark.storage.StorageLevel.OFF_HEAP" oFF_HEAP :: StorageLevel
+
 data {-# CLASS "org.apache.spark.api.java.JavaFutureAction" #-} JavaFutureAction t = JavaFutureAction (Object# (JavaFutureAction t))
   deriving Class
 
+foreign import java unsafe "@interface jobIds" jobIds :: Java (JavaFutureAction t) (List JInteger)
+
 data {-# CLASS "org.apache.spark.SparkContext" #-} SparkContext = SparkContext (Object# SparkContext)
   deriving Class
+
+
 
 data {-# CLASS "org.apache.spark.partial.PartialResult" #-} PartialResult r = PartialResult (Object# (PartialResult r))
   deriving Class
