@@ -1,5 +1,3 @@
-{-# LANGUAGE MagicHash #-}
-
 module Spark.Core.JavaDoubleRDD
   ( module X
   , module Spark.Core.JavaDoubleRDD )
@@ -13,8 +11,8 @@ import qualified Spark.Core.Internal.JavaDoubleRDD as X hiding (filter,
                                                                 histogram2,
                                                                 histogram3)
 
-filter :: (forall a. JDouble -> Java a JBoolean) -> Java JavaDoubleRDD JavaDoubleRDD
-filter t = S.filter (mkFun t)
+filterDouble :: (forall a. JDouble -> Java a JBoolean) -> Java JavaDoubleRDD JavaDoubleRDD
+filterDouble t = S.filterDouble (mkFun t)
 
 histogram :: [Double] -> Java JavaDoubleRDD [Int64]
 histogram t = fmap fromJava $ S.histogram (toJava t)

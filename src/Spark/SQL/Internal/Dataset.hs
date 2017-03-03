@@ -1,4 +1,4 @@
-{-# LANGUAGE MagicHash #-}
+
 module Spark.SQL.Internal.Dataset where
 
 import Java
@@ -13,19 +13,19 @@ foreign import java unsafe agg :: (t <: Object) => Column -> ColumnArray
 foreign import java unsafe "agg" agg2 :: (t <: Object) => Map JString JString
                                 -> Java (Dataset t) (Dataset Row)
 
-foreign import java unsafe alias :: (t <: Object) => JString
+foreign import java unsafe alias :: (t <: Object) => String
                               -> Java (Dataset t) (Dataset t)
 
 -- foreign import java unsafe alias2 :: (t <: Object) => Symbol
 --                                  -> Java (Dataset t) (Dataset t)
 
-foreign import java unsafe apply :: (t <: Object) => JString
+foreign import java unsafe apply :: (t <: Object) => String
                                 -> Java (Dataset t) (Column)
 
 foreign import java unsafe as :: (t <: Object, u <: Object) => Encoder u
                               -> Java (Dataset t) (Dataset u)
 
-foreign import java unsafe "as" as2 :: (t <: Object) => JString
+foreign import java unsafe "as" as2 :: (t <: Object) => String
                                -> Java (Dataset t) (Dataset t)
 
 -- foreign import java unsafe as3 :: (t <: Object) => Symbol
@@ -41,7 +41,7 @@ foreign import java unsafe "checkpoint" checkpoint2 :: (t <: Object) => Bool -> 
 
 foreign import java unsafe coalesce :: (t <: Object) => Int -> Java (Dataset t) (Dataset t)
 
-foreign import java unsafe col :: (t <: Object) => JString
+foreign import java unsafe col :: (t <: Object) => String
                                -> Java (Dataset t) (Column)
 
 foreign import java unsafe collect :: (t <: Object) => Java (Dataset t) (Object)
@@ -52,12 +52,12 @@ foreign import java unsafe columns :: (t <: Object) => Java (Dataset t) (JString
 
 foreign import java unsafe count :: (t <: Object) => Java (Dataset t) (Int64)
 
-foreign import java unsafe createGlobalTempView :: (t <: Object) => JString -> Java (Dataset t) ()
+foreign import java unsafe createGlobalTempView :: (t <: Object) => String -> Java (Dataset t) ()
 
 foreign import java unsafe createOrReplaceTempView :: (t <: Object)
-                                                   => JString -> Java (Dataset t) ()
+                                                   => String -> Java (Dataset t) ()
 
-foreign import java unsafe createTempView :: (t <: Object) => JString -> Java (Dataset t) ()
+foreign import java unsafe createTempView :: (t <: Object) => String -> Java (Dataset t) ()
 
 foreign import java unsafe crossJoin :: (t <: Object) => Dataset b -> Java (Dataset t) (Dataset row)
 
@@ -66,10 +66,10 @@ foreign import java unsafe cube:: (t <: Object) => ColumnArray -> Java (Dataset 
 --foreign import java unsafe cube2 :: (t <: Object) => Seq Column -> Java (Dataset t) (RelationalGroupedDataset)
 
 -- foreign import java unsafe cube3 :: (t <: Object)
---                                  => JString -> Seq Column -> Java (Dataset t) (RelationalGroupedDataset)
+--                                  => String -> Seq Column -> Java (Dataset t) (RelationalGroupedDataset)
 
 foreign import java unsafe "cube" cube2 :: (t <: Object)
-                                 => JString -> JStringArray -> Java (Dataset t) (RelationalGroupedDataset)
+                                 => String -> JStringArray -> Java (Dataset t) (RelationalGroupedDataset)
 
 -- foreign import java unsafe describe :: (t <: Object) => Seq JString -> Java (Dataset t) (Dataset row)
 
@@ -83,7 +83,7 @@ foreign import java unsafe drop :: (t <: Object) => Column -> Java (Dataset t) (
 
 foreign import java unsafe "drop" drop2 :: (t <: Object) => JStringArray -> Java (Dataset t) (Dataset row)
 
-foreign import java unsafe "drop" drop3 :: (t <: Object) => JString -> Java (Dataset t) (Dataset row)
+foreign import java unsafe "drop" drop3 :: (t <: Object) => String -> Java (Dataset t) (Dataset row)
 
 foreign import java unsafe dropDuplicates :: (t <: Object) => Java (Dataset t) (Dataset t)
 
@@ -95,7 +95,7 @@ foreign import java unsafe "dropDuplicates" dropDuplicates2 :: (t <: Object) => 
 --                                           => JString -> Seq JString -> Java (Dataset t) (Dataset t)
 
 foreign import java unsafe "dropDuplicates" dropDuplicates3 :: (t <: Object)
-                                           => JString -> JStringArray -> Java (Dataset t) (Dataset t)
+                                           => String -> JStringArray -> Java (Dataset t) (Dataset t)
 
 foreign import java unsafe dtypes :: (t <: Object) => Java (Dataset t) (Tuple2 JString JString)
 
@@ -117,7 +117,7 @@ foreign import java unsafe "filter" filter2 :: (t <: Object) => FilterFunction t
 
 -- foreign import java unsafe filter3 :: (t <: Object) => Function1 t -> Java (Dataset t) (Dataset t)
 
-foreign import java unsafe "filter" filter3 :: (t <: Object) => JString -> Java (Dataset t) (Dataset t)
+foreign import java unsafe "filter" filter3 :: (t <: Object) => String -> Java (Dataset t) (Dataset t)
 
 foreign import java unsafe first :: (t <: Object) => Java (Dataset t) (t)
 
@@ -142,7 +142,7 @@ foreign import java unsafe groupBy :: (t <: Object) => ColumnArray -> Java (Data
 
 -- foreign import java unsafe groupBy3 :: (t <: Object) => JString -> Seq JString -> Java (Dataset t) (RelationalGroupedDataset)
 
-foreign import java unsafe groupBy2 :: (t <: Object) => JString -> JStringArray -> Java (Dataset t) (RelationalGroupedDataset)
+foreign import java unsafe groupBy2 :: (t <: Object) => String -> JStringArray -> Java (Dataset t) (RelationalGroupedDataset)
 
 -- foreign import java unsafe groupByKey :: (t <: Object, k<: Object)
 --                                     => Function1 t k -> Encoder k -> Java (Dataset t) (KeyValueGroupedDataset k t)
@@ -168,19 +168,19 @@ foreign import java unsafe join :: (t <: Object) => Dataset b -> Java (Dataset t
 
 foreign import java unsafe "join" join2 :: (t <: Object) => Dataset b -> Column -> Java (Dataset t) (Dataset row)
 
-foreign import java unsafe "join" join3 :: (t <: Object) => Dataset b -> Column -> JString -> Java (Dataset t) (Dataset row)
+foreign import java unsafe "join" join3 :: (t <: Object) => Dataset b -> Column -> String -> Java (Dataset t) (Dataset row)
 
 -- foreign import java unsafe join4 :: (t <: Object) => Dataset b -> Seq JString -> Java (Dataset t) (Dataset row)
 --
 -- foreign import java unsafe join5 :: (t <: Object) => Dataset b -> Seq JString -> JString -> Java (Dataset t) (Dataset row) --TODO
 
-foreign import java unsafe join6 :: (t <: Object) => Dataset b -> JString -> Java (Dataset t) (Dataset row)
+foreign import java unsafe join6 :: (t <: Object) => Dataset b -> String -> Java (Dataset t) (Dataset row)
 
 foreign import java unsafe joinWith :: (t <: Object, u <:Object)
                                     => Dataset u -> Column -> Java (Dataset t) (Dataset (Tuple2 t t))
 
 foreign import java unsafe joinWith2 :: (t <: Object, u <:Object)
-                                  => Dataset u -> Column -> JString -> Java (Dataset t) (Dataset (Tuple2 t t))
+                                  => Dataset u -> Column -> String -> Java (Dataset t) (Dataset (Tuple2 t t))
 
 foreign import java unsafe limit :: (t <: Object) => Int -> Java (Dataset t) (Dataset t)
 
@@ -206,7 +206,7 @@ foreign import java unsafe orderBy :: (t <: Object) => ColumnArray -> Java (Data
 
 -- foreign import java unsafe orderBy3 :: (t <: Object) => JString -> Seq Column -> Java (Dataset t) (Dataset t)
 
-foreign import java unsafe "orderBy" orderBy2 :: (t <: Object) => JString -> JStringArray -> Java (Dataset t) (Dataset t)
+foreign import java unsafe "orderBy" orderBy2 :: (t <: Object) => String -> JStringArray -> Java (Dataset t) (Dataset t)
 
 foreign import java unsafe persist :: (t <: Object) => Java (Dataset t) (Dataset t)
 
@@ -228,7 +228,7 @@ foreign import java unsafe reduce :: (t <: Object) => Function2 t t t -> Java (D
 
 foreign import java unsafe "reduce" reduce2 :: (t <: Object) => ReduceFunction t -> Java (Dataset t) (t)
 
-foreign import java unsafe registerTempTable :: (t <: Object) => JString -> Java (Dataset t) ()
+foreign import java unsafe registerTempTable :: (t <: Object) => String -> Java (Dataset t) ()
 
 foreign import java unsafe repartition :: (t <: Object) => ColumnArray -> Java (Dataset t) (Dataset t)
 
@@ -246,7 +246,7 @@ foreign import java unsafe rollup :: (t <: Object) => ColumnArray -> Java (Datas
 
 -- foreign import java unsafe "rollup" rollup2 :: (t <: Object) => JString -> Seq Column -> Java (Dataset t) (RelationalGroupedDataset)
 
-foreign import java unsafe "rollup" rollup2 :: (t <: Object) => JString -> JStringArray -> Java (Dataset t) (RelationalGroupedDataset)
+foreign import java unsafe "rollup" rollup2 :: (t <: Object) => String -> JStringArray -> Java (Dataset t) (RelationalGroupedDataset)
 
 foreign import java unsafe sample :: (t <: Object) => Bool -> Double -> Java (Dataset t) (Dataset t)
 
@@ -262,7 +262,7 @@ foreign import java unsafe select :: (t <: Object) => ColumnArray -> Java (Datas
 
 -- foreign import java unsafe select3 :: (t <: Object) => JString -> Seq JString -> Java (Dataset t) (Dataset row)
 
-foreign import java unsafe "select" select2 :: (t <: Object) => JString -> JStringArray -> Java (Dataset t) (Dataset row)
+foreign import java unsafe "select" select2 :: (t <: Object) => String -> JStringArray -> Java (Dataset t) (Dataset row)
 
 foreign import java unsafe "select" select3 :: (t <: Object, u1 <: Object) => TypedColumn t u1 -> Java (Dataset t) (Dataset u1)
 
@@ -299,7 +299,7 @@ foreign import java unsafe sort :: (t <: Object) => ColumnArray -> Java (Dataset
 
 -- foreign import java unsafe sort3 :: (t <: Object) => JString -> Seq JString -> Java (Dataset t) (Dataset t)
 
-foreign import java unsafe "sort" sort2 :: (t <: Object) => JString -> JStringArray -> Java (Dataset t) (Dataset t)
+foreign import java unsafe "sort" sort2 :: (t <: Object) => String -> JStringArray -> Java (Dataset t) (Dataset t)
 
 foreign import java unsafe sortWithinPartitions :: (t <: Object) => ColumnArray -> Java (Dataset t) (Dataset t)
 
@@ -309,7 +309,7 @@ foreign import java unsafe sortWithinPartitions :: (t <: Object) => ColumnArray 
 --                                                  => JString -> Seq JString -> Java (Dataset t) (Dataset t)
 
 foreign import java unsafe "sortWithinPartitions" sortWithinPartitions2 :: (t <: Object)
-                                                 => JString -> JStringArray -> Java (Dataset t) (Dataset t)
+                                                 => String -> JStringArray -> Java (Dataset t) (Dataset t)
 
 foreign import java unsafe sparkSession :: (t <: Object) => Java (Dataset t) (SparkSession)
 
@@ -350,13 +350,13 @@ foreign import java unsafe unpersist2 :: (t <: Object) => Bool -> Java (Dataset 
 
 foreign import java unsafe "where" where_ :: (t <: Object) => Column -> Java (Dataset t) (Dataset t)
 
-foreign import java unsafe where2 :: (t <: Object) => JString -> Java (Dataset t) (Dataset t)
+foreign import java unsafe where2 :: (t <: Object) => String -> Java (Dataset t) (Dataset t)
 
-foreign import java unsafe withColumn :: (t <: Object) => JString -> Column -> Java (Dataset t) (Dataset row)
+foreign import java unsafe withColumn :: (t <: Object) => String -> Column -> Java (Dataset t) (Dataset row)
 
-foreign import java unsafe withColumnRenamed :: (t <: Object) => JString -> JString -> Java (Dataset t) (Dataset row)
+foreign import java unsafe withColumnRenamed :: (t <: Object) => String -> String -> Java (Dataset t) (Dataset row)
 
-foreign import java unsafe withWatermark :: (t <: Object) => JString -> JString -> Java (Dataset t) (Dataset t)
+foreign import java unsafe withWatermark :: (t <: Object) => String -> String -> Java (Dataset t) (Dataset t)
 
 foreign import java unsafe write :: (t <: Object) => Java (Dataset t) (DataFrameWriter t)
 

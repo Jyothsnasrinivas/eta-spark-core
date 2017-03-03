@@ -1,4 +1,3 @@
-{-# LANGUAGE MagicHash #-}
 module Spark.Core.Internal.JavaRDDLike where
 
 import Java
@@ -20,9 +19,9 @@ foreign import java unsafe collectAsync :: (t <: Object, this <: JavaRDDLike t t
 
 foreign import java unsafe collectPartitions :: (t <: Object, this <: JavaRDDLike t this) => JIntArray -> Java this (ListArray t)
 
-foreign import java unsafe context :: (t <: Object, this <: JavaRDDLike t this) => Java this (SparkContext)
+foreign import java unsafe context :: (t <: Object, this <: JavaRDDLike t this) => Java this SparkContext
 
-foreign import java unsafe count :: (t <: Object, this <: JavaRDDLike t this) => Java this (Int64)
+foreign import java unsafe count :: (t <: Object, this <: JavaRDDLike t this) => Java this Int64
 
 foreign import java unsafe countApprox :: (t <: Object, this <: JavaRDDLike t this) => Int64 -> Java this (PartialResult BoundedDouble)
 
@@ -108,7 +107,7 @@ foreign import java unsafe max :: (t <: Object, this <: JavaRDDLike t this) => C
 
 foreign import java unsafe min :: (t <: Object, this <: JavaRDDLike t this) => Comparator t -> Java this t
 
-foreign import java unsafe name :: (t <: Object, this <: JavaRDDLike t this) => Java this JString
+foreign import java unsafe name :: (t <: Object, this <: JavaRDDLike t this) => Java this String
 
 foreign import java unsafe partitioner :: (t <: Object, this <: JavaRDDLike t this) => Java this (Optional Partitioner)
 
@@ -122,19 +121,19 @@ foreign import java unsafe pipe3 :: (t <: Object, this <: JavaRDDLike t this)
                                  => List JString -> Map JString JString -> Bool -> Int -> Java this (JavaRDD JString)
 
 foreign import java unsafe pipe4 :: (t <: Object, this <: JavaRDDLike t this)
-                                => List JString -> Map JString JString -> Bool -> Int -> JString -> Java this (JavaRDD JString)
+                                => List JString -> Map JString JString -> Bool -> Int -> String -> Java this (JavaRDD JString)
 
-foreign import java unsafe pipe5 :: (t <: Object, this <: JavaRDDLike t this) => JString -> Java this (JavaRDD JString)
+foreign import java unsafe pipe5 :: (t <: Object, this <: JavaRDDLike t this) => String -> Java this (JavaRDD JString)
 
 foreign import java unsafe rdd :: (t <: Object, this <: JavaRDDLike t this) => Java this (RDD t)
 
 foreign import java unsafe reduce :: (t <: Object, this <: JavaRDDLike t this) => Function2 t t t -> Java this t
 
-foreign import java unsafe saveAsObjectFile :: (t <: Object, this <: JavaRDDLike t this) => JString -> Java this ()
+foreign import java unsafe saveAsObjectFile :: (t <: Object, this <: JavaRDDLike t this) => String -> Java this ()
 
-foreign import java unsafe saveAsTextFile :: (t <: Object, this <: JavaRDDLike t this) => JString -> Java this ()
+foreign import java unsafe saveAsTextFile :: (t <: Object, this <: JavaRDDLike t this) => String -> Java this ()
 
-foreign import java unsafe "saveAsTextFile" saveAsTextFile2 :: (t <: Object, this <: JavaRDDLike t this, b <: CompressionCodec) => JString -> JClass b -> Java this ()
+foreign import java unsafe "saveAsTextFile" saveAsTextFile2 :: (t <: Object, this <: JavaRDDLike t this, b <: CompressionCodec) => String -> JClass b -> Java this ()
 
 foreign import java unsafe take :: (t <: Object, this <: JavaRDDLike t this) => Int -> Java this (List t)
 
@@ -148,7 +147,7 @@ foreign import java unsafe takeSample :: (t <: Object, this <: JavaRDDLike t thi
 
 foreign import java unsafe takeSample2 :: (t <: Object, this <: JavaRDDLike t this) => Bool -> Int -> Int64 -> Java this (List t)
 
-foreign import java unsafe toDebugString :: (t <: Object, this <: JavaRDDLike t this) => Java this JString
+foreign import java unsafe toDebugString :: (t <: Object, this <: JavaRDDLike t this) => Java this String
 
 foreign import java unsafe toLocalIterator :: (t <: Object, this <: JavaRDDLike t this) => Java this (Iterator t)
 

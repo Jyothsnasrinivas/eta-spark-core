@@ -1,4 +1,3 @@
-{-# LANGUAGE MagicHash #-}
 module Spark.Core.JavaRDD
   ( module X
   , module Spark.Core.JavaRDD )

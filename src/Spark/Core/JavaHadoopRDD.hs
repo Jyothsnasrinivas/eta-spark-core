@@ -1,5 +1,3 @@
-{-# LANGUAGE MagicHash #-}
-
 module Spark.Core.JavaHadoopRDD
   ( module X
   , module Spark.Core.JavaHadoopRDD )

@@ -1,4 +1,4 @@
-{-# LANGUAGE MagicHash #-}
+
 module Spark.SQL.Internal.Types
  (module Spark.SQL.Internal.Types,
   module Spark.Core.Internal.Types)

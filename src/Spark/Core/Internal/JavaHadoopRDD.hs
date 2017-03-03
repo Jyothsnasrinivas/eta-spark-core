@@ -1,5 +1,3 @@
-{-# LANGUAGE MagicHash #-}
-
 module Spark.Core.Internal.JavaHadoopRDD where
 
 import Java

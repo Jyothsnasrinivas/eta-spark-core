@@ -1,4 +1,4 @@
-{-# LANGUAGE MagicHash #-}
+
 module Spark.Core.Internal.JavaRDD where
 
 import Java
@@ -26,7 +26,7 @@ foreign import java unsafe randomSplit :: (t <: Object) => JDoubleArray -> Java 
 
 foreign import java unsafe randomSplit2 :: (t <: Object) => JDoubleArray -> Int64 -> Java (JavaRDD t) (JavaRDDArray t)
 
-foreign import java unsafe rdd :: (t <: Object) => Java (JavaRDD t) (RDD t)
+--foreign import java unsafe rdd :: (t <: Object) => Java (JavaRDD t) (RDD t)
 
 foreign import java unsafe repartition :: (t <: Object) => Int -> Java (JavaRDD t) (JavaRDD t)
 
@@ -50,4 +50,4 @@ foreign import java unsafe unpersist :: (t <: Object) =>  Java (JavaRDD t) (Java
 
 foreign import java unsafe unpersist2 :: (t <: Object) => Bool -> Java (JavaRDD t) (JavaRDD t)
 
-foreign import java unsafe wrapRDD :: (t <: Object) => RDD t -> Java (JavaRDD t) (JavaRDD t)
+--foreign import java unsafe wrapRDD :: (t <: Object) => RDD t -> Java (JavaRDD t) (JavaRDD t)

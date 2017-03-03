@@ -1,4 +1,4 @@
-{-# LANGUAGE MagicHash #-}
+
 module Spark.Core.Internal.Methods where
 
 import Java

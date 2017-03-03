@@ -1,5 +1,3 @@
-{-# LANGUAGE MagicHash #-}
-
 module Spark.Core.Internal.JavaDoubleRDD where
 
 import Java
@@ -15,7 +13,7 @@ foreign import java unsafe distinct :: Java JavaDoubleRDD JavaDoubleRDD
 
 foreign import java unsafe distinct2 :: Int -> Java JavaDoubleRDD JavaDoubleRDD
 
-foreign import java unsafe filter :: Function JDouble JBoolean -> Java JavaDoubleRDD JavaDoubleRDD
+foreign import java unsafe "filter" filterDouble :: Function JDouble JBoolean -> Java JavaDoubleRDD JavaDoubleRDD
 
 foreign import java unsafe first :: Java JavaDoubleRDD JDouble
 
@@ -55,7 +53,7 @@ foreign import java unsafe sampleStdev :: Java JavaDoubleRDD JDouble
 
 foreign import java unsafe sampleVariance :: Java JavaDoubleRDD JDouble
 
-foreign import java unsafe setName :: JString -> Java JavaDoubleRDD JavaDoubleRDD
+foreign import java unsafe setName :: String -> Java JavaDoubleRDD JavaDoubleRDD
 
 foreign import java unsafe srdd :: Java JavaDoubleRDD (RDD Object)
 

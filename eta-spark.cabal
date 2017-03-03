@@ -16,7 +16,8 @@ build-type:          Simple
 cabal-version:       >=1.10
 
 library
-  exposed-modules:   Spark.Core.Internal.JavaDoubleRDD
+  exposed-modules:   Spark.Core
+                     Spark.Core.Internal.JavaDoubleRDD
                      Spark.Core.Internal.JavaHadoopRDD
                      Spark.Core.Internal.JavaNewHadoopRDD
                      Spark.Core.Internal.JavaPairRDD
@@ -48,5 +49,6 @@ library
                        AllowAmbiguousTypes
                        ScopedTypeVariables
   build-depends:       base >=4.8 && <4.9
+                     , ghc-prim
   hs-source-dirs:      src
   default-language:    Haskell2010

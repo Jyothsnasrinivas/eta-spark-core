@@ -1,4 +1,4 @@
-{-# LANGUAGE MagicHash #-}
+{-# LANGUAGE DataKinds, TypeFamilies #-}
 module Spark.Core.Internal.Types
   (module Spark.Core.Internal.Types,
   module Scala)
@@ -20,6 +20,8 @@ instance JArray (Tuple2 t1 t2) (Tuple2Array t1 t2)
 data {-# CLASS "org.apache.spark.api.java.JavaRDD" #-} JavaRDD t = JavaRDD (Object# (JavaRDD t))
   deriving Class
 
+type instance Inherits (JavaRDD t) = '[Object, JavaRDDLike t (JavaRDD t)]
+
 data {-# CLASS "org.apache.spark.api.java.JavaHadoopRDD" #-} JavaHadoopRDD k v = JavaHadoopRDD (Object# (JavaHadoopRDD k v))
   deriving Class
 
@@ -29,8 +31,11 @@ data {-# CLASS "org.apache.spark.api.java.JavaNewHadoopRDD" #-} JavaNewHadoopRDD
 data {-# CLASS "org.apache.spark.api.java.JavaPairRDD" #-} JavaPairRDD k v = JavaPairRDD (Object# (JavaPairRDD k v))
   deriving Class
 
+type instance Inherits (JavaPairRDD k v) = '[Object, JavaRDDLike (Tuple2 k v) (JavaPairRDD k v)]
+
 data {-# CLASS "org.apache.spark.api.java.JavaRDDLike" #-} JavaRDDLike t this = JavaRDDLike (Object# (JavaRDDLike t this))
   deriving Class
+
 
 data {-# CLASS "org.apache.spark.api.java.JavaDoubleRDD" #-} JavaDoubleRDD = JavaDoubleRDD (Object# JavaDoubleRDD)
   deriving Class
@@ -64,7 +69,7 @@ data {-# CLASS "org.apache.spark.api.java.JavaFutureAction" #-} JavaFutureAction
 
 foreign import java unsafe "@interface jobIds" jobIds :: Java (JavaFutureAction t) (List JInteger)
 
-data {-# CLASS "org.apache.spark.SparkContext" #-} SparkContext = SparkContext (Object# SparkContext)
+data {-# CLASS "org.apache.spark.api.java.JavaSparkContext" #-} SparkContext = SparkContext (Object# SparkContext)
   deriving Class
 
 data {-# CLASS "org.apache.spark.partial.PartialResult" #-} PartialResult r = PartialResult (Object# (PartialResult r))
