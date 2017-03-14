@@ -30,7 +30,7 @@ main = java $ do
   where logfile = "README.md"
 ```
 
-This is the original Scala code.
+This is the original Scala code:
 
 ```scala
 import org.apache.spark.SparkContext
@@ -52,11 +52,17 @@ object SimpleApp {
 ```
 ## Installing
 
-First clone this repository
+1. First clone this repository
 
-`epm install https://github.com/Jyothsnasrinivas/eta-spark`
+`git clone https://github.com/Jyothsnasrinivas/eta-spark`
 
-Go to the directory `cd eta-spark` and then `epm install`
+2. Go to the newly-cloned directory.
+
+`cd eta-spark`
+
+3. Install the package.
+
+`epm install`
 
 ## Running
 
