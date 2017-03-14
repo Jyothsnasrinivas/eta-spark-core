@@ -21,7 +21,7 @@ foreign import java unsafe collectPartitions :: (t <: Object, this <: JavaRDDLik
 
 foreign import java unsafe context :: (t <: Object, this <: JavaRDDLike t this) => Java this SparkContext
 
-foreign import java unsafe "@interface count" count :: (t <: Object, this <: JavaRDDLike t this) => Java this Int64
+foreign import java safe "@interface count" count :: (t <: Object, this <: JavaRDDLike t this) => Java this Int64
 
 foreign import java unsafe countApprox :: (t <: Object, this <: JavaRDDLike t this) => Int64 -> Java this (PartialResult BoundedDouble)
 
