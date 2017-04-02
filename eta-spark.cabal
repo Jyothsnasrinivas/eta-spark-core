@@ -33,11 +33,6 @@ library
                      Spark.Core.JavaPairRDD
                      Spark.Core.JavaRDD
                      Spark.Core.JavaRDDLike
-                     Spark.SQL.Internal.Column
-                     Spark.SQL.Internal.Dataset
-                     Spark.SQL.Internal.Types
-                     Spark.SQL.Dataset
-
 
   -- other-modules:
   -- other-extensions:
