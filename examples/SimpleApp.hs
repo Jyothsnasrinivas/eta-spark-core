@@ -4,7 +4,7 @@ import Java
 import Spark.Core as S
 
 checkLetter :: Char -> (forall a. JString -> Java a JBoolean)
-checkLetter c str = return $ toJava ('a' `elem` str')
+checkLetter c str = return $ toJava (c `elem` str')
   where str' = fromJava str :: String
 
 main :: IO ()
