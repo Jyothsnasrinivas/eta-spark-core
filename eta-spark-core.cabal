@@ -52,4 +52,4 @@ library
 source-repository this
   type: git
   location: https://github.com/Jyothsnasrinivas/eta-spark
-  branch: 0.1.0.0
+  tag: 0.1.1.0
