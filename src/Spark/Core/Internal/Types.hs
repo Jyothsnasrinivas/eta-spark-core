@@ -1,12 +1,12 @@
 {-# LANGUAGE DataKinds, TypeFamilies #-}
 module Spark.Core.Internal.Types
   (module Spark.Core.Internal.Types,
-  module Scala)
+  module Interop.Scala)
 where
 
 import Java
 import Java.Utils
-import Scala
+import Interop.Scala
 
 data {-# CLASS "java.util.List[]" #-} ListArray t = ListArray (Object# (ListArray t))
   deriving Class
