@@ -54,15 +54,15 @@ object SimpleApp {
 
 1. First clone this repository
 
-`git clone https://github.com/Jyothsnasrinivas/eta-spark`
+`git clone https://github.com/Jyothsnasrinivas/eta-spark-core`
 
 2. Go to the newly-cloned directory.
 
-`cd eta-spark`
+`cd eta-spark-core`
 
-3. Install the package.
+3. Using the package.
 
-`epm install`
+Add `eta-spark-core` to build-depends field in your cabal file
 
 ## Running
 

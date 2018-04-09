@@ -1,11 +1,12 @@
 {-# LANGUAGE DataKinds, TypeFamilies #-}
 module Spark.Core.Internal.Types
   (module Spark.Core.Internal.Types,
-  module Scala)
+  module Interop.Scala)
 where
 
 import Java
-import Scala
+import Java.Utils
+import Interop.Scala
 
 data {-# CLASS "java.util.List[]" #-} ListArray t = ListArray (Object# (ListArray t))
   deriving Class
@@ -87,8 +88,8 @@ data {-# CLASS "org.apache.spark.Partition" #-} Partition = Partition (Object# P
 data {-# CLASS "org.apache.spark.TaskContext" #-} TaskContext = TaskContext (Object# TaskContext)
   deriving Class
 
-data {-# CLASS "java.util.Comparator" #-} Comparator t = Comparator (Object# (Comparator t))
-  deriving Class
+-- data {-# CLASS "java.util.Comparator" #-} Comparator t = Comparator (Object# (Comparator t))
+--   deriving Class
 
 data {-# CLASS "org.apache.spark.Partitioner" #-} Partitioner = Partitioner (Object# Partitioner)
   deriving Class
