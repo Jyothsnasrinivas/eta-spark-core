@@ -3,16 +3,16 @@
 
 name:                eta-spark-core
 version:             0.1.1.0
-synopsis:            Spark Bindings Eta
--- description:
+synopsis:            Spark Bindings for Eta
+description:         See README.
 license:             Apache-2.0
 license-file:        LICENSE
 author:              Jyothsna Srinivas
 maintainer:          jyothsnasrinivas17@gmail.com
--- copyright:
+copyright:           Jyothsna Srinivas, 2018
 category:            Apache Spark
 build-type:          Simple
--- extra-source-files:
+extra-source-files:  README.md
 cabal-version:       >=1.10
 
 library
@@ -49,7 +49,14 @@ library
   hs-source-dirs:      src
   default-language:    Haskell2010
 
+executable simple-app-exe
+  main-is:             SimpleApp.hs
+  hs-source-dirs:      examples
+  build-depends:       base >=4.8 && <4.9
+                     , eta-spark-core
+  default-language:    Haskell2010
+
 source-repository this
-  type: git
-  location: https://github.com/Jyothsnasrinivas/eta-spark-core
-  tag: 0.1.1.0
+  type:                git
+  location:            https://github.com/Jyothsnasrinivas/eta-spark-core
+  tag:                 0.1.1.0

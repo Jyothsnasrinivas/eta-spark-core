@@ -30,7 +30,7 @@ main = java $ do
   where logfile = "README.md"
 ```
 
-This is the original Scala code:
+This is the original Scala code.
 
 ```scala
 import org.apache.spark.SparkContext
@@ -52,30 +52,22 @@ object SimpleApp {
 ```
 ## Installing
 
-1. First clone this repository
+0. Install [etlas](https://eta-lang.org/docs/user-guides/eta-user-guide/installation/etlas).
+
+0. Clone this repository.
 
 `git clone https://github.com/Jyothsnasrinivas/eta-spark-core`
 
-2. Go to the newly-cloned directory.
+0. Go to the newly-cloned directory.
 
 `cd eta-spark-core`
 
-3. Using the package.
+0. Build it.
 
-Add `eta-spark-core` to build-depends field in your cabal file
+`etlas build eta-spark-core`
+`etlas build simple-app-exe --enable-uberjar-mode`
 
-## Running
+0. Run it.
 
-Examples can be found in examples directory. To run an example, compile it with the following command:
-
-```eta SimpleApp.hs```
-
-This should generate a JAR file called `RunSimpleApp.jar`.
-
-To run, go to the directory of your Spark installation and run the following command:
-
-```
-./bin/spark-submit --class eta.main --master local $PATH_TO_SIMPLEAPP/RunSimpleApp.jar
-```
-
-where `PATH_TO_SIMPLEAPP` is the path to `RunSimpleApp.jar`.
+`./bin/spark-submit --class eta.main --master local dist/<path-to-simple-app-exe>/simple-app-exe.jar`
+More examples can be found in examples directory.
